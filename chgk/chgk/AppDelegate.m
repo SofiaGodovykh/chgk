@@ -19,12 +19,12 @@
     [self.window makeKeyAndVisible];
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     UINavigationController *mainNC = [[UINavigationController alloc]initWithRootViewController:questionVC];
-    
+
     questionVC.navigationItem.title = @"Вопрос";
     mainNC.navigationBar.translucent = NO;
     
     self.window.rootViewController = mainNC;
-  
+
     return YES;
 }
 

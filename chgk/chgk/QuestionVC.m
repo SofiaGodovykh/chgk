@@ -75,6 +75,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+         self.navigationController.view.backgroundColor = self.view.backgroundColor;
     // Do any additional setup after loading the view from its nib.
 }
 

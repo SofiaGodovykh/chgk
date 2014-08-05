@@ -79,6 +79,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="100" id="O6t-xA-z73"/>
                                 <constraint firstAttribute="centerY" secondItem="uFh-Lf-VAk" secondAttribute="centerY" id="VhO-qJ-z4V"/>
                                 <constraint firstItem="uFh-Lf-VAk" firstAttribute="leading" secondItem="ISM-to-Q4L" secondAttribute="leading" constant="4" id="yYO-VJ-iHh"/>
                             </constraints>
@@ -103,7 +104,7 @@
                                     </constraints>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.92156869173049927" green="0.92156869173049927" blue="0.92156869173049927" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="O52-pC-i9X" secondAttribute="trailing" constant="4" id="TXz-X7-2tv"/>
                                 <constraint firstAttribute="centerY" secondItem="O52-pC-i9X" secondAttribute="centerY" id="X1Q-Rw-1Pv"/>
@@ -116,8 +117,8 @@
                             <rect key="frame" x="100" y="0.0" width="90" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="№ 70" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwM-JX-6h5">
-                                    <rect key="frame" x="9" y="0.0" width="70" height="35"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="№ 70" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwM-JX-6h5">
+                                    <rect key="frame" x="14" y="2" width="63" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -126,7 +127,8 @@
                             </subviews>
                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="90" id="Upy-iK-D82"/>
+                                <constraint firstAttribute="centerX" secondItem="dwM-JX-6h5" secondAttribute="centerX" id="63z-At-fFh"/>
+                                <constraint firstAttribute="centerY" secondItem="dwM-JX-6h5" secondAttribute="centerY" id="Xcn-PW-VJw"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -134,6 +136,7 @@
                     <constraints>
                         <constraint firstItem="ISM-to-Q4L" firstAttribute="top" secondItem="kkh-Lz-Qkh" secondAttribute="top" id="1HG-Hj-jZy"/>
                         <constraint firstItem="7HO-65-vhf" firstAttribute="height" secondItem="ISM-to-Q4L" secondAttribute="height" id="1du-6S-OCr"/>
+                        <constraint firstItem="7HO-65-vhf" firstAttribute="leading" secondItem="ISM-to-Q4L" secondAttribute="trailing" id="IDk-Vc-e5J"/>
                         <constraint firstItem="7HO-65-vhf" firstAttribute="height" secondItem="kkh-Lz-Qkh" secondAttribute="height" id="Pso-bL-l6H"/>
                         <constraint firstItem="ISM-to-Q4L" firstAttribute="leading" secondItem="kkh-Lz-Qkh" secondAttribute="leading" id="bBc-3f-al5"/>
                         <constraint firstItem="EHS-xO-P6a" firstAttribute="leading" secondItem="7HO-65-vhf" secondAttribute="trailing" id="dw7-3H-Kbo"/>
@@ -141,7 +144,6 @@
                         <constraint firstAttribute="height" constant="35" id="j4A-Pc-4Fh"/>
                         <constraint firstAttribute="trailing" secondItem="EHS-xO-P6a" secondAttribute="trailing" id="oLd-dL-jKR"/>
                         <constraint firstItem="7HO-65-vhf" firstAttribute="height" secondItem="EHS-xO-P6a" secondAttribute="height" id="qLK-U9-a96"/>
-                        <constraint firstItem="7HO-65-vhf" firstAttribute="leading" secondItem="ISM-to-Q4L" secondAttribute="trailing" id="tnB-0R-95f"/>
                         <constraint firstItem="7HO-65-vhf" firstAttribute="top" secondItem="kkh-Lz-Qkh" secondAttribute="top" id="vdO-R8-3QZ"/>
                     </constraints>
                 </view>
