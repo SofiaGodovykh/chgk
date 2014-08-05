@@ -10,8 +10,6 @@
 
 @interface QuestionVC ()
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomConst;
-
 @property (nonatomic, weak) IBOutlet UILabel *score;
 @property (nonatomic, weak) IBOutlet UILabel *timer;
 @property (nonatomic, weak) IBOutlet UILabel *questionCount;
@@ -23,66 +21,48 @@
 
 @implementation QuestionVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(void)dismissKeyboard
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [self.view endEditing:YES];
 }
 
 - (void)observeKeyboard {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    NSDictionary *info = [notification userInfo];
-    NSValue *kbFrame = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGRect keyboardFrame = [kbFrame CGRectValue];
-    
-    CGRect finalKeyboardFrame = [self.view convertRect:keyboardFrame fromView:self.view.window];
-    
-    int kbHeight = finalKeyboardFrame.size.height;
-    
-    int height = kbHeight + self.textViewBottomConst.constant;
-    
-    self.textViewBottomConst.constant = height;
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    CGSize kbSize = [[[notification userInfo]
+                      objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    self.view.frame = aRect;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    NSDictionary *info = [notification userInfo];
-    
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    self.textViewBottomConst.constant = 10;
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    CGSize kbSize = [[[notification userInfo]
+                      objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGRect aRect = self.view.frame;
+    aRect.size.height += kbSize.height;
+    self.view.frame = aRect;
 }
-
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-         self.navigationController.view.backgroundColor = self.view.backgroundColor;
+    UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc]
+                                             initWithTarget:self
+                                             action:@selector(dismissKeyboard)];
+    [tapBackground setNumberOfTapsRequired:2];
+    [self.view addGestureRecognizer:tapBackground];
+    [self observeKeyboard];
     // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
