@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "QuestionVC.h"
+#import "MenuVC.h"
+#import <Parse/Parse.h>
+
 
 @implementation AppDelegate
 
@@ -17,12 +19,16 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    QuestionVC *questionVC = [[QuestionVC alloc]init];
-    UINavigationController *mainNC = [[UINavigationController alloc]initWithRootViewController:questionVC];
 
-    questionVC.navigationItem.title = @"Вопрос";
-    mainNC.navigationBar.translucent = NO;
+    [Parse setApplicationId:@"xY2YIiOHIscOXOHkGUgLOsI5BNTHpKk3FAVfneOc"
+                  clientKey:@"Hd3KObGIFrksILNLF5eaGw0AFkA7WbGym42OZ9j2"];
     
+    MenuVC *menu = [[MenuVC alloc]init];
+    menu.navigationItem.title = @"Меню";
+    
+    UINavigationController *mainNC = [[UINavigationController alloc]
+                                      initWithRootViewController:menu];
+    mainNC.navigationBar.translucent = NO;
     self.window.rootViewController = mainNC;
 
     return YES;

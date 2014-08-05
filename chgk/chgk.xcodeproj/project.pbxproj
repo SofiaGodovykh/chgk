@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80C8B8411990F7A30080290F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8401990F7A30080290F /* Parse.framework */; };
+		80C8B8431990F7C70080290F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8421990F7C70080290F /* AudioToolbox.framework */; };
+		80C8B8451990F7CD0080290F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8441990F7CD0080290F /* CFNetwork.framework */; };
+		80C8B8471990F7DB0080290F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8461990F7DB0080290F /* CoreLocation.framework */; };
+		80C8B8491990F7E40080290F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8481990F7E40080290F /* libz.dylib */; };
+		80C8B84B1990F7E90080290F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B84A1990F7E90080290F /* MobileCoreServices.framework */; };
+		80C8B84D1990F7EE0080290F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B84C1990F7EE0080290F /* QuartzCore.framework */; };
+		80C8B84F1990F7F50080290F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B84E1990F7F50080290F /* Security.framework */; };
+		80C8B8511990F7FB0080290F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8501990F7FB0080290F /* StoreKit.framework */; };
+		80C8B8531990F8010080290F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8521990F8010080290F /* SystemConfiguration.framework */; };
+		80C8B8561990FCA50080290F /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B8551990FCA50080290F /* Question.m */; };
+		80C8B85A1991019A0080290F /* MenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B8581991019A0080290F /* MenuVC.m */; };
+		80C8B85B1991019A0080290F /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C8B8591991019A0080290F /* MenuVC.xib */; };
 		849F74591990C5A40051CF7E /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F74571990C5A40051CF7E /* QuestionVC.m */; };
 		849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849F74581990C5A40051CF7E /* QuestionVC.xib */; };
 		849F745D1990D7760051CF7E /* timerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F745B1990D7760051CF7E /* timerIcon.png */; };
@@ -36,6 +49,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		80C8B8401990F7A30080290F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		80C8B8421990F7C70080290F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		80C8B8441990F7CD0080290F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		80C8B8461990F7DB0080290F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		80C8B8481990F7E40080290F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		80C8B84A1990F7E90080290F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		80C8B84C1990F7EE0080290F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		80C8B84E1990F7F50080290F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		80C8B8501990F7FB0080290F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		80C8B8521990F8010080290F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		80C8B8541990FCA50080290F /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		80C8B8551990FCA50080290F /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		80C8B8571991019A0080290F /* MenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuVC.h; sourceTree = "<group>"; };
+		80C8B8581991019A0080290F /* MenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuVC.m; sourceTree = "<group>"; };
+		80C8B8591991019A0080290F /* MenuVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
 		849F74561990C5A40051CF7E /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		849F74571990C5A40051CF7E /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		849F74581990C5A40051CF7E /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
@@ -64,8 +92,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C8B8531990F8010080290F /* SystemConfiguration.framework in Frameworks */,
+				80C8B8511990F7FB0080290F /* StoreKit.framework in Frameworks */,
+				80C8B84F1990F7F50080290F /* Security.framework in Frameworks */,
+				80C8B84D1990F7EE0080290F /* QuartzCore.framework in Frameworks */,
+				80C8B84B1990F7E90080290F /* MobileCoreServices.framework in Frameworks */,
+				80C8B8491990F7E40080290F /* libz.dylib in Frameworks */,
+				80C8B8471990F7DB0080290F /* CoreLocation.framework in Frameworks */,
 				84DE108F198603860058C5B4 /* CoreGraphics.framework in Frameworks */,
+				80C8B8451990F7CD0080290F /* CFNetwork.framework in Frameworks */,
+				80C8B8431990F7C70080290F /* AudioToolbox.framework in Frameworks */,
 				84DE1091198603860058C5B4 /* UIKit.framework in Frameworks */,
+				80C8B8411990F7A30080290F /* Parse.framework in Frameworks */,
 				84DE108D198603860058C5B4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +143,16 @@
 		84DE108B198603860058C5B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				80C8B8521990F8010080290F /* SystemConfiguration.framework */,
+				80C8B8501990F7FB0080290F /* StoreKit.framework */,
+				80C8B84E1990F7F50080290F /* Security.framework */,
+				80C8B84C1990F7EE0080290F /* QuartzCore.framework */,
+				80C8B84A1990F7E90080290F /* MobileCoreServices.framework */,
+				80C8B8481990F7E40080290F /* libz.dylib */,
+				80C8B8461990F7DB0080290F /* CoreLocation.framework */,
+				80C8B8441990F7CD0080290F /* CFNetwork.framework */,
+				80C8B8421990F7C70080290F /* AudioToolbox.framework */,
+				80C8B8401990F7A30080290F /* Parse.framework */,
 				84DE108C198603860058C5B4 /* Foundation.framework */,
 				84DE108E198603860058C5B4 /* CoreGraphics.framework */,
 				84DE1090198603860058C5B4 /* UIKit.framework */,
@@ -118,9 +166,14 @@
 			children = (
 				84DE109B198603860058C5B4 /* AppDelegate.h */,
 				84DE109C198603860058C5B4 /* AppDelegate.m */,
+				80C8B8541990FCA50080290F /* Question.h */,
+				80C8B8551990FCA50080290F /* Question.m */,
 				849F74561990C5A40051CF7E /* QuestionVC.h */,
 				849F74571990C5A40051CF7E /* QuestionVC.m */,
 				849F74581990C5A40051CF7E /* QuestionVC.xib */,
+				80C8B8571991019A0080290F /* MenuVC.h */,
+				80C8B8581991019A0080290F /* MenuVC.m */,
+				80C8B8591991019A0080290F /* MenuVC.xib */,
 				84DE109E198603860058C5B4 /* Images.xcassets */,
 				849F745B1990D7760051CF7E /* timerIcon.png */,
 				849F745C1990D7760051CF7E /* timerIcon@2x.png */,
@@ -236,6 +289,7 @@
 				849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */,
 				849F745E1990D7760051CF7E /* timerIcon@2x.png in Resources */,
 				84DE1097198603860058C5B4 /* InfoPlist.strings in Resources */,
+				80C8B85B1991019A0080290F /* MenuVC.xib in Resources */,
 				849F745D1990D7760051CF7E /* timerIcon.png in Resources */,
 				84DE109F198603860058C5B4 /* Images.xcassets in Resources */,
 			);
@@ -257,7 +311,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				849F74591990C5A40051CF7E /* QuestionVC.m in Sources */,
+				80C8B8561990FCA50080290F /* Question.m in Sources */,
 				84DE109D198603860058C5B4 /* AppDelegate.m in Sources */,
+				80C8B85A1991019A0080290F /* MenuVC.m in Sources */,
 				84DE1099198603860058C5B4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +433,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "chgk/chgk-Prefix.pch";
 				INFOPLIST_FILE = "chgk/chgk-Info.plist";
@@ -390,6 +450,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "chgk/chgk-Prefix.pch";
 				INFOPLIST_FILE = "chgk/chgk-Info.plist";

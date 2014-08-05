@@ -7,6 +7,8 @@
 //
 
 #import "QuestionVC.h"
+#import "Question.h"
+#import <Parse/Parse.h>
 
 @interface QuestionVC ()
 
@@ -16,6 +18,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *answer;
 @property (nonatomic, weak) IBOutlet UITextView *question;
 @property (nonatomic, weak) IBOutlet UIButton *confirmButton;
+@property (strong) Question *currentQuestion;
 
 @end
 
@@ -53,6 +56,49 @@
     self.view.frame = aRect;
 }
 
+- (IBAction)confirmPressed:(id)sender
+{
+    QuestionVC *nextQuestion = [[QuestionVC alloc] init];
+    [self.navigationController pushViewController:nextQuestion animated:YES];
+
+}
+
+- (void)downloadSingleQuestion
+{
+    self.question.text = @"Загрузка вопроса...";
+    int ind = arc4random() % 12000;
+    NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder = %d)",ind];
+    PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
+    questQuery.limit = 1;
+    [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if ( (!error) && ([objects count]>0) ){
+            self.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
+            self.question.text = self.currentQuestion.question;
+        }
+        else{
+            NSLog(@"Parse.com error: %@ %@", error, [error userInfo]);
+            self.question.text = @"Вопрос не загружен :(";
+        }
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!!self.navigationController) {
+        self.navigationItem.leftBarButtonItem =
+        [[UIBarButtonItem alloc]initWithTitle:@"Меню"
+                                        style:UIBarButtonItemStyleBordered
+                                       target:self
+                                       action:@selector(menuButtonTapped)];;
+    }
+}
+
+- (void)menuButtonTapped{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,7 +108,10 @@
     [tapBackground setNumberOfTapsRequired:2];
     [self.view addGestureRecognizer:tapBackground];
     [self observeKeyboard];
-    // Do any additional setup after loading the view from its nib.
+
+    
+    [self downloadSingleQuestion];
+    
 }
 
 @end
