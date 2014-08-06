@@ -12,6 +12,7 @@
                 <outlet property="questionCount" destination="dwM-JX-6h5" id="d6j-Mi-fsD"/>
                 <outlet property="score" destination="uFh-Lf-VAk" id="oRU-MV-LqN"/>
                 <outlet property="timer" destination="O52-pC-i9X" id="7a7-ja-ilG"/>
+                <outlet property="timerLabel" destination="O52-pC-i9X" id="h4K-08-Eth"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -47,7 +48,7 @@
                             <rect key="frame" x="190" y="0.0" width="110" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O52-pC-i9X">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O52-pC-i9X">
                                     <rect key="frame" x="41" y="2" width="65" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="26"/>

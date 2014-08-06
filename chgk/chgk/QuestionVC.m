@@ -17,11 +17,14 @@
 @interface QuestionVC () <ContinueDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *score;
-@property (nonatomic, weak) IBOutlet UILabel *timer;
+@property (nonatomic, weak) IBOutlet UILabel *timerLabel;
 @property (nonatomic, weak) IBOutlet UILabel *questionCount;
 @property (nonatomic, weak) IBOutlet UITextField *answer;
 @property (nonatomic, weak) IBOutlet UITextView *question;
 @property (nonatomic, weak) IBOutlet UIButton *confirmButton;
+@property int seconds;
+@property bool isTimerWork;
+@property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, strong) OneRound *oneRound;
 
@@ -76,6 +79,7 @@
 #pragma mark dealing with modal windows
 - (IBAction)confirmPressed:(id)sender
 {
+    self.isTimerWork = NO;
     [self dismissKeyboard];
     self.oneRound.playerAnswer = self.answer.text;
 //TODO: send copy of oneRound
@@ -113,6 +117,7 @@
                        self.oneRound.wrongAnswers ];
     int questCount = self.oneRound.rightAnswers + self.oneRound.wrongAnswers + 1;
     self.questionCount.text = [NSString stringWithFormat:@"№ %d", questCount];
+    [self startTimer];
 }
 
 - (void)downloadSingleQuestion
@@ -132,9 +137,47 @@
             self.question.text = [NSString stringWithFormat:@"Вопрос %d не загружен :(", ind];
         }
     }];
+    
+    [self startTimer];
 }
 
+-(void)startTimer
+{
+    if(_isTimerWork)
+    {
+        [self.timer invalidate];
+    }
+    _isTimerWork = YES;
+    _seconds = 60;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+                                                selector:@selector(refreshTimeLabel:)
+                                                userInfo:nil repeats:YES];
+    NSLog(@"starttimer");
+}
 
+-(void)refreshTimeLabel:(id)sender
+{
+    if(![_timer isValid])
+        return;
+    
+    if(_isTimerWork == NO)
+    {
+        [self.timer invalidate];
+        return;
+    }
+    _seconds--;
+    NSMutableString *time = [[NSMutableString alloc] initWithString:@"00:"];
+    [time appendFormat:@"%d", _seconds];
+    _timerLabel.text = [NSString stringWithFormat:@"%@", time];
+    NSLog(@"%@", time);
+    if(_seconds == 0 && self.isTimerWork) //when the minute expired
+    {
+        [self confirmPressed:nil];
+        [self.timer invalidate];
+        NSLog(@"seconds os over");
+        
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -155,7 +198,6 @@
     if (!self.oneRound.currentQuestion) {
         [self downloadSingleQuestion];
     }
-
 }
 
 @end
