@@ -20,6 +20,9 @@
 		80C8B8561990FCA50080290F /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B8551990FCA50080290F /* Question.m */; };
 		80C8B85A1991019A0080290F /* MenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B8581991019A0080290F /* MenuVC.m */; };
 		80C8B85B1991019A0080290F /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C8B8591991019A0080290F /* MenuVC.xib */; };
+		80C8B860199212310080290F /* AnswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B85E199212310080290F /* AnswerVC.m */; };
+		80C8B861199212310080290F /* AnswerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C8B85F199212310080290F /* AnswerVC.xib */; };
+		80C8B8641992351B0080290F /* OneRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B8631992351B0080290F /* OneRound.m */; };
 		849F74591990C5A40051CF7E /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F74571990C5A40051CF7E /* QuestionVC.m */; };
 		849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849F74581990C5A40051CF7E /* QuestionVC.xib */; };
 		849F745D1990D7760051CF7E /* timerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F745B1990D7760051CF7E /* timerIcon.png */; };
@@ -64,6 +67,12 @@
 		80C8B8571991019A0080290F /* MenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuVC.h; sourceTree = "<group>"; };
 		80C8B8581991019A0080290F /* MenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuVC.m; sourceTree = "<group>"; };
 		80C8B8591991019A0080290F /* MenuVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
+		80C8B85C1991F8290080290F /* ContinueDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueDelegate.h; sourceTree = "<group>"; };
+		80C8B85D199212310080290F /* AnswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerVC.h; sourceTree = "<group>"; };
+		80C8B85E199212310080290F /* AnswerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerVC.m; sourceTree = "<group>"; };
+		80C8B85F199212310080290F /* AnswerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerVC.xib; sourceTree = "<group>"; };
+		80C8B8621992351B0080290F /* OneRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneRound.h; sourceTree = "<group>"; };
+		80C8B8631992351B0080290F /* OneRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneRound.m; sourceTree = "<group>"; };
 		849F74561990C5A40051CF7E /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		849F74571990C5A40051CF7E /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		849F74581990C5A40051CF7E /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
@@ -168,9 +177,15 @@
 				84DE109C198603860058C5B4 /* AppDelegate.m */,
 				80C8B8541990FCA50080290F /* Question.h */,
 				80C8B8551990FCA50080290F /* Question.m */,
+				80C8B8621992351B0080290F /* OneRound.h */,
+				80C8B8631992351B0080290F /* OneRound.m */,
 				849F74561990C5A40051CF7E /* QuestionVC.h */,
 				849F74571990C5A40051CF7E /* QuestionVC.m */,
 				849F74581990C5A40051CF7E /* QuestionVC.xib */,
+				80C8B85D199212310080290F /* AnswerVC.h */,
+				80C8B85E199212310080290F /* AnswerVC.m */,
+				80C8B85F199212310080290F /* AnswerVC.xib */,
+				80C8B85C1991F8290080290F /* ContinueDelegate.h */,
 				80C8B8571991019A0080290F /* MenuVC.h */,
 				80C8B8581991019A0080290F /* MenuVC.m */,
 				80C8B8591991019A0080290F /* MenuVC.xib */,
@@ -291,6 +306,7 @@
 				84DE1097198603860058C5B4 /* InfoPlist.strings in Resources */,
 				80C8B85B1991019A0080290F /* MenuVC.xib in Resources */,
 				849F745D1990D7760051CF7E /* timerIcon.png in Resources */,
+				80C8B861199212310080290F /* AnswerVC.xib in Resources */,
 				84DE109F198603860058C5B4 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,8 +328,10 @@
 			files = (
 				849F74591990C5A40051CF7E /* QuestionVC.m in Sources */,
 				80C8B8561990FCA50080290F /* Question.m in Sources */,
+				80C8B860199212310080290F /* AnswerVC.m in Sources */,
 				84DE109D198603860058C5B4 /* AppDelegate.m in Sources */,
 				80C8B85A1991019A0080290F /* MenuVC.m in Sources */,
+				80C8B8641992351B0080290F /* OneRound.m in Sources */,
 				84DE1099198603860058C5B4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +440,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

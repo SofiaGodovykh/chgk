@@ -18,33 +18,31 @@
 
 @implementation MenuVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (IBAction)startGamePressed:(id)sender
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     [self.navigationController pushViewController:questionVC animated:YES];
+    
+    if (!self.navigationController){
+        //TODO: think more about such solution. Is it a leak?
+        UINavigationController *mainNC = [[UINavigationController alloc]
+                                          initWithRootViewController:questionVC];
+        mainNC.navigationBar.translucent = NO;
+        self.view.window.rootViewController = mainNC;
+    }
 }
 
-
+- (IBAction)continueGamePressed:(id)sender
+{
+    if (!!self.delegate){
+        [self.delegate removeMenu];
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
