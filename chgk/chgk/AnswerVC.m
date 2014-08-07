@@ -31,7 +31,7 @@
 @synthesize oneRound = oneRound_;
 @synthesize isRight = isRight_;
 
-//TODO: bad practice to permit init;
+//TODO: bad practice to permit init of VC;
 - (id)init
 {
     NSLog(@"Please use initWithRound: instead");
@@ -56,7 +56,7 @@
         ([oneRound_.playerAnswer isEqualToString:@"hh"])){
         return YES;
     }
-//мундиаль.
+
     return NO;
 }
 

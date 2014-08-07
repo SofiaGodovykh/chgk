@@ -126,6 +126,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 {
     self.question.text = @"Загрузка вопроса...";
     int ind = arc4random() % 10219;
+    ind = 9507;
     NSLog(@"Downloading %d question...", ind);
     NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder = %d)",ind];
     PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
@@ -151,12 +152,11 @@ static const NSUInteger TimerMaximumSeconds = 60;
 #pragma mark timer work
 -(void)startTimer
 {
-    if(_isTimerWork)
-    {
+    if(self.isTimerWork){
         [self.timer invalidate];
     }
-    _isTimerWork = YES;
-    _seconds = TimerMaximumSeconds;
+    self.isTimerWork = YES;
+    self.seconds = TimerMaximumSeconds;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
                                                 selector:@selector(refreshTimeLabel:)
@@ -167,20 +167,20 @@ static const NSUInteger TimerMaximumSeconds = 60;
 
 -(void)refreshTimeLabel:(id)sender
 {
-    if(![_timer isValid])
+    if(![self.timer isValid])
         return;
     
-    if(_isTimerWork == NO)
-    {
+    if(!self.isTimerWork){
         [self.timer invalidate];
         return;
     }
-    _seconds--;
+    self.seconds--;
     NSMutableString *time = [[NSMutableString alloc] initWithString:@"00:"];
-    [time appendFormat:@"%d", _seconds];
-    _timerLabel.text = [NSString stringWithFormat:@"%@", time];
+    [time appendFormat:@"%02d", self.seconds];
+
+    self.timerLabel.text = [NSString stringWithFormat:@"%@", time];
     NSLog(@"%@", time);
-    if(_seconds == 0 && self.isTimerWork) //when the minute expired
+    if(self.seconds == 0 && self.isTimerWork) //when the minute expired
     {
         [self confirmPressed:nil];
         [self.timer invalidate];
