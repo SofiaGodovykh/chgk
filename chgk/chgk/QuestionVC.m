@@ -14,6 +14,8 @@
 #import "ContinueDelegate.h"
 #import <Parse/Parse.h>
 
+static const NSUInteger TimerMaximumSeconds = 60;
+
 @interface QuestionVC () <ContinueDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *score;
@@ -124,6 +126,7 @@
 {
     self.question.text = @"Загрузка вопроса...";
     int ind = arc4random() % 10219;
+    NSLog(@"Downloading %d question...", ind);
     NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder = %d)",ind];
     PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
     questQuery.limit = 1;
@@ -131,16 +134,21 @@
         if ( (!error) && ([objects count]>0) ){
             self.oneRound.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
             self.question.text = self.oneRound.currentQuestion.question;
+            NSString *text = [self.oneRound.currentQuestion.question
+                              stringByTrimmingCharactersInSet:
+                              [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+            text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+            self.question.text = text;
         }
         else{
             NSLog(@"Parse.com error: %@ %@", error, [error userInfo]);
             self.question.text = [NSString stringWithFormat:@"Вопрос %d не загружен :(", ind];
         }
     }];
-    
-    [self startTimer];
 }
 
+#pragma mark timer work
 -(void)startTimer
 {
     if(_isTimerWork)
@@ -148,10 +156,12 @@
         [self.timer invalidate];
     }
     _isTimerWork = YES;
-    _seconds = 60;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self
+    _seconds = TimerMaximumSeconds;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                  target:self
                                                 selector:@selector(refreshTimeLabel:)
-                                                userInfo:nil repeats:YES];
+                                                userInfo:nil
+                                                 repeats:YES];
     NSLog(@"starttimer");
 }
 
@@ -196,6 +206,7 @@
     [self.view addGestureRecognizer:tapBackground];
     [self observeKeyboard];
     if (!self.oneRound.currentQuestion) {
+        [self startTimer];
         [self downloadSingleQuestion];
     }
 }
