@@ -25,6 +25,8 @@ static const NSUInteger TimerMaximumSeconds = 60;
 @property (nonatomic, weak) IBOutlet UITextView *question;
 @property (nonatomic, weak) IBOutlet UIButton *confirmButton;
 @property int seconds;
+// CR: bool is C++ type, use BOOL instead of it. And you don't need this variable just check if
+// timer is nil.
 @property bool isTimerWork;
 @property (nonatomic, strong) NSTimer *timer;
 
@@ -52,6 +54,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 }
 
 - (void)observeKeyboard {
+    // CR: You should call removeObserver:... somewhere.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -75,6 +78,8 @@ static const NSUInteger TimerMaximumSeconds = 60;
                       objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGRect aRect = self.view.frame;
     aRect.size.height += kbSize.height;
+    // CR: Don't change self.view frame, it is managed by a superview, add a subview with all
+    // content and resize it.
     self.view.frame = aRect;
 }
 
@@ -153,6 +158,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 -(void)startTimer
 {
     if(self.isTimerWork){
+        // CR: Set timer to nil.
         [self.timer invalidate];
     }
     self.isTimerWork = YES;
@@ -171,10 +177,12 @@ static const NSUInteger TimerMaximumSeconds = 60;
         return;
     
     if(!self.isTimerWork){
+        // CR: Set timer to nil.
         [self.timer invalidate];
         return;
     }
     self.seconds--;
+    // CR: Why not just self.timerLabel.text = [NSString stringWithFormat:@"00:%02d", self.seconds]?
     NSMutableString *time = [[NSMutableString alloc] initWithString:@"00:"];
     [time appendFormat:@"%02d", self.seconds];
 
@@ -183,6 +191,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
     if(self.seconds == 0 && self.isTimerWork) //when the minute expired
     {
         [self confirmPressed:nil];
+        // CR: Set timer to nil.
         [self.timer invalidate];
         NSLog(@"seconds os over");
         
