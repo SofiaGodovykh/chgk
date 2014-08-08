@@ -95,6 +95,12 @@
     [super viewDidLoad];
     self.isRight = [self checkAnswer];
     self.playerAnswer.text = self.oneRound.playerAnswer;
+    
+    if([self.playerAnswer.text  isEqual: @""])
+    {
+        [self.makeCorrectButton setEnabled:false];
+    }
+    
     self.correctAnswer.text = self.oneRound.currentQuestion.answer;
     self.annotationView.text = self.oneRound.currentQuestion.annotation;
     
