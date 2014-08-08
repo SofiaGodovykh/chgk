@@ -20,5 +20,6 @@
 @property (nonatomic, copy, readonly) NSString *pictureName;
 
 - (instancetype)initWithParseObject:(PFObject *)object;
+- (id)init NS_UNAVAILABLE;
 
 @end

@@ -71,11 +71,12 @@
     if(!!error){
         NSLog(@"Error in string trimming, %@", error.userInfo);
     }
+    if (!!modified){
     [regex replaceMatchesInString:modified
                           options:kNilOptions
                             range:NSMakeRange(0, [modified length])
                      withTemplate:@""];
-
+    }
     return [modified copy];
 }
 

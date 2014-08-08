@@ -29,8 +29,6 @@
 @synthesize sources = sources_;
 @synthesize pictureName = pictureName_;
 
-// CR: You can add compiler checks by adding to the header:
-// - (id)init NS_UNAVAILABLE;
 - (id)init
 {
     NSLog(@"Please use initWithParseObject: instead");

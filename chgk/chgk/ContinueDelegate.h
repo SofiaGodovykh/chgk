@@ -13,5 +13,6 @@
 - (void)removeMenu;
 - (void)nextQuestionAfterAnswer:(BOOL)isRight;
 - (void)downloadSingleQuestion;
+- (void)stopTimer;
 
 @end

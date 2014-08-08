@@ -11,7 +11,6 @@
                 <outlet property="question" destination="Fwt-oy-U0k" id="xsK-sH-7sS"/>
                 <outlet property="questionCount" destination="dwM-JX-6h5" id="d6j-Mi-fsD"/>
                 <outlet property="score" destination="uFh-Lf-VAk" id="oRU-MV-LqN"/>
-                <outlet property="timer" destination="O52-pC-i9X" id="7a7-ja-ilG"/>
                 <outlet property="timerLabel" destination="O52-pC-i9X" id="h4K-08-Eth"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -107,10 +106,10 @@
                         <constraint firstItem="7HO-65-vhf" firstAttribute="top" secondItem="kkh-Lz-Qkh" secondAttribute="top" id="vdO-R8-3QZ"/>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwt-oy-U0k">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwt-oy-U0k">
                     <rect key="frame" x="10" y="35" width="300" height="423"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -158,12 +157,10 @@
                 <constraint firstItem="Fwt-oy-U0k" firstAttribute="top" secondItem="kkh-Lz-Qkh" secondAttribute="bottom" id="42b-Ag-2SX"/>
                 <constraint firstAttribute="bottom" secondItem="0w7-Rp-xPd" secondAttribute="bottom" id="Aj9-2H-OkK"/>
                 <constraint firstAttribute="trailing" secondItem="kkh-Lz-Qkh" secondAttribute="trailing" constant="10" id="CjS-EV-wsC"/>
-                <constraint firstItem="0w7-Rp-xPd" firstAttribute="top" secondItem="Fwt-oy-U0k" secondAttribute="bottom" id="GOc-9Y-n9x"/>
                 <constraint firstItem="Fwt-oy-U0k" firstAttribute="top" secondItem="kkh-Lz-Qkh" secondAttribute="bottom" id="IUW-wC-wYx"/>
                 <constraint firstItem="kkh-Lz-Qkh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="JzN-XM-poR"/>
-                <constraint firstItem="0w7-Rp-xPd" firstAttribute="top" secondItem="Fwt-oy-U0k" secondAttribute="bottom" id="K6Y-nL-JDT"/>
+                <constraint firstItem="0w7-Rp-xPd" firstAttribute="top" secondItem="Fwt-oy-U0k" secondAttribute="bottom" id="PdH-dI-Nj3"/>
                 <constraint firstAttribute="trailing" secondItem="Fwt-oy-U0k" secondAttribute="trailing" constant="10" id="Roo-v3-FsS"/>
-                <constraint firstAttribute="centerX" secondItem="Fwt-oy-U0k" secondAttribute="centerX" id="VeD-JC-hsw"/>
                 <constraint firstAttribute="centerX" secondItem="0w7-Rp-xPd" secondAttribute="centerX" id="dew-pd-jpw"/>
                 <constraint firstItem="kkh-Lz-Qkh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="jqz-6L-9rM"/>
                 <constraint firstItem="Fwt-oy-U0k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="qt8-Mr-qy5"/>

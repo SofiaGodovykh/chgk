@@ -23,8 +23,9 @@
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     [self.navigationController pushViewController:questionVC animated:YES];
     
-    if (!self.navigationController){
-        //TODO: think more about such solution. Is it a leak?
+    if ((!self.navigationController)&&(!!self.delegate)){
+        //TODO: think more about such solution. Isn't it a leak?
+        [self.delegate stopTimer];
         UINavigationController *mainNC = [[UINavigationController alloc]
                                           initWithRootViewController:questionVC];
         mainNC.navigationBar.translucent = NO;

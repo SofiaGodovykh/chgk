@@ -24,10 +24,8 @@ static const NSUInteger TimerMaximumSeconds = 60;
 @property (nonatomic, weak) IBOutlet UITextField *answer;
 @property (nonatomic, weak) IBOutlet UITextView *question;
 @property (nonatomic, weak) IBOutlet UIButton *confirmButton;
+//@property (nonatomic, weak) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property int seconds;
-// CR: bool is C++ type, use BOOL instead of it. And you don't need this variable just check if
-// timer is nil.
-@property bool isTimerWork;
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, strong) OneRound *oneRound;
@@ -37,6 +35,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 @implementation QuestionVC
 
 @synthesize oneRound = oneRound_;
+@synthesize timer = timer_;
 
 - (OneRound *)oneRound
 {
@@ -54,7 +53,6 @@ static const NSUInteger TimerMaximumSeconds = 60;
 }
 
 - (void)observeKeyboard {
-    // CR: You should call removeObserver:... somewhere.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -86,14 +84,12 @@ static const NSUInteger TimerMaximumSeconds = 60;
 #pragma mark dealing with modal windows
 - (IBAction)confirmPressed:(id)sender
 {
-    self.isTimerWork = NO;
     [self dismissKeyboard];
     self.oneRound.playerAnswer = self.answer.text;
 //TODO: send copy of oneRound
     AnswerVC *modalAnswer = [[AnswerVC alloc]initWithRound:self.oneRound];
     modalAnswer.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     modalAnswer.delegate = self;
-    
     [self presentViewController:modalAnswer
                        animated:YES
                      completion:nil];
@@ -131,7 +127,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 {
     self.question.text = @"Загрузка вопроса...";
     int ind = arc4random() % 10219;
-    ind = 9507;
+//    ind = 9507; //for test
     NSLog(@"Downloading %d question...", ind);
     NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder = %d)",ind];
     PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
@@ -139,7 +135,6 @@ static const NSUInteger TimerMaximumSeconds = 60;
     [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if ( (!error) && ([objects count]>0) ){
             self.oneRound.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
-            self.question.text = self.oneRound.currentQuestion.question;
             NSString *text = [self.oneRound.currentQuestion.question
                               stringByTrimmingCharactersInSet:
                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -157,11 +152,9 @@ static const NSUInteger TimerMaximumSeconds = 60;
 #pragma mark timer work
 -(void)startTimer
 {
-    if(self.isTimerWork){
-        // CR: Set timer to nil.
-        [self.timer invalidate];
+    if(!!self.timer){
+        [self stopTimer];
     }
-    self.isTimerWork = YES;
     self.seconds = TimerMaximumSeconds;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                   target:self
@@ -176,23 +169,19 @@ static const NSUInteger TimerMaximumSeconds = 60;
     if(![self.timer isValid])
         return;
     
-    if(!self.isTimerWork){
-        // CR: Set timer to nil.
-        [self.timer invalidate];
+    if(!self.timer){
+        [self stopTimer];
         return;
     }
     self.seconds--;
-    // CR: Why not just self.timerLabel.text = [NSString stringWithFormat:@"00:%02d", self.seconds]?
-    NSMutableString *time = [[NSMutableString alloc] initWithString:@"00:"];
-    [time appendFormat:@"%02d", self.seconds];
+    NSMutableString *time = [NSMutableString stringWithFormat:@"00:%02d", self.seconds];
 
     self.timerLabel.text = [NSString stringWithFormat:@"%@", time];
     NSLog(@"%@", time);
-    if(self.seconds == 0 && self.isTimerWork) //when the minute expired
+    if(self.seconds == 0 && !!self.timer) //when the minute expired
     {
         [self confirmPressed:nil];
-        // CR: Set timer to nil.
-        [self.timer invalidate];
+        [self stopTimer];
         NSLog(@"seconds os over");
         
     }
@@ -215,9 +204,33 @@ static const NSUInteger TimerMaximumSeconds = 60;
     [self.view addGestureRecognizer:tapBackground];
     [self observeKeyboard];
     if (!self.oneRound.currentQuestion) {
-        [self startTimer];
         [self downloadSingleQuestion];
+        [self startTimer];
     }
 }
 
+- (void)stopTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
+
+//this could be used later for picture viewing
+//- (void)textViewDidChange:(UITextView *)textView
+//{
+//    CGSize sizeThatFitsTextView = [textView sizeThatFits:
+//                                   CGSizeMake(textView.frame.size.width, MAXFLOAT)];
+//
+//    self.textViewHeightConstraint.constant = ceilf(MIN(sizeThatFitsTextView.height,422));
+//}
 @end
