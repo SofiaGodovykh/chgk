@@ -111,6 +111,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 
 - (void)nextQuestionAfterAnswer:(BOOL)isRight
 {
+    self.timerLabel.text = @"01:00";
     [self dismissViewControllerAnimated:YES completion:nil];
     self.answer.text = @"";
     isRight == 1? self.oneRound.rightAnswers++ : self.oneRound.wrongAnswers ++;
