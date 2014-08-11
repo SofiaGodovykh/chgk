@@ -10,4 +10,6 @@
 
 @interface QuestionVC : UIViewController
 
+- (void)continuePreviousGame;
+
 @end

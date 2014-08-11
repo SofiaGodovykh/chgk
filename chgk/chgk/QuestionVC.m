@@ -16,6 +16,10 @@
 #import <Parse/Parse.h>
 
 static const NSUInteger TimerMaximumSeconds = 60;
+static NSString *const DefaultFileNameForLocalStore = @"PlayedQuestionsAndScore.dat";
+static NSString *const kWinsKey = @"wins";
+static NSString *const kLoosesKey = @"looses";
+static NSString *const kPlayedKey = @"score";
 
 @interface QuestionVC () <ContinueDelegate>
 
@@ -30,14 +34,18 @@ static const NSUInteger TimerMaximumSeconds = 60;
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, strong) OneRound *oneRound;
-
+@property (nonatomic, strong) NSMutableArray *playedQuestions;
+@property (nonatomic, strong) NSURL *persistanceURL;
 @end
 
 @implementation QuestionVC
 
 @synthesize oneRound = oneRound_;
 @synthesize timer = timer_;
+@synthesize playedQuestions = playedQuestions_;
+@synthesize persistanceURL = persistanceURL_;
 
+#pragma mark initialization and lazy getters
 - (OneRound *)oneRound
 {
     if (!oneRound_){
@@ -45,6 +53,27 @@ static const NSUInteger TimerMaximumSeconds = 60;
     }
 
     return oneRound_;
+}
+
+- (NSMutableArray *)playedQuestions
+{
+    if (!playedQuestions_){
+        playedQuestions_ = [NSMutableArray array];
+    }
+    return playedQuestions_;
+}
+
+- (NSURL *)persistanceURL
+{
+    if (!persistanceURL_) {
+        NSURL *const documentDirectoryURL =
+        [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                inDomains:NSUserDomainMask] lastObject];
+        persistanceURL_ =
+        [documentDirectoryURL URLByAppendingPathComponent:DefaultFileNameForLocalStore];
+    }
+    
+    return persistanceURL_;
 }
 
 #pragma mark showing and hiding keyboard
@@ -85,6 +114,8 @@ static const NSUInteger TimerMaximumSeconds = 60;
 #pragma mark dealing with modal windows
 - (IBAction)confirmPressed:(id)sender
 {
+    [self.playedQuestions addObject:[NSNumber numberWithInteger:
+                                     self.oneRound.currentQuestion.IdByOrder]];
     [self dismissKeyboard];
     [self stopTimer];
     self.oneRound.playerAnswer = self.answer.text;
@@ -117,15 +148,12 @@ static const NSUInteger TimerMaximumSeconds = 60;
     [self dismissViewControllerAnimated:YES completion:nil];
     self.answer.text = @"";
     isRight == 1? self.oneRound.rightAnswers++ : self.oneRound.wrongAnswers ++;
-    self.score.text = [NSString stringWithFormat:
-                       @"%d:%d",
-                       self.oneRound.rightAnswers,
-                       self.oneRound.wrongAnswers ];
-    int questCount = self.oneRound.rightAnswers + self.oneRound.wrongAnswers + 1;
-    self.questionCount.text = [NSString stringWithFormat:@"№ %d", questCount];
     [self startTimer];
+    [self refreshScoreLabel];
+    [self saveScore];
 }
 
+#pragma mark working with database
 - (void)downloadSingleQuestion
 {
     self.question.text = @"Загрузка вопроса...";
@@ -202,9 +230,26 @@ static const NSUInteger TimerMaximumSeconds = 60;
     }
 }
 
+- (void)refreshScoreLabel
+{
+    self.score.text = [NSString stringWithFormat:
+                       @"%d:%d",
+                       self.oneRound.rightAnswers,
+                       self.oneRound.wrongAnswers ];
+    int questCount = self.oneRound.rightAnswers + self.oneRound.wrongAnswers + 1;
+    self.questionCount.text = [NSString stringWithFormat:@"№ %d", questCount];
+}
+
+- (void)stopTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self refreshScoreLabel];
     if (!!self.navigationController) {
         self.navigationItem.leftBarButtonItem =
         [[UIBarButtonItem alloc]initWithTitle:@"Меню"
@@ -221,13 +266,27 @@ static const NSUInteger TimerMaximumSeconds = 60;
     if (!self.oneRound.currentQuestion) {
         [self downloadSingleQuestion];
         [self startTimer];
+        [self saveScore];
     }
 }
 
-- (void)stopTimer
+#pragma mark persistance functions
+- (void)continuePreviousGame
 {
-    [self.timer invalidate];
-    self.timer = nil;
+    NSDictionary *oldData = [NSDictionary dictionaryWithContentsOfURL:self.persistanceURL];
+    if (!!oldData){
+        self.oneRound.wrongAnswers = [[oldData objectForKey:kLoosesKey] intValue];
+        self.oneRound.rightAnswers = [[oldData objectForKey:kWinsKey] intValue];
+        self.playedQuestions = [oldData objectForKey:self.playedQuestions];
+    }
+}
+
+- (void)saveScore
+{
+    NSDictionary *saveData = @{kWinsKey   : [NSNumber numberWithInteger:self.oneRound.rightAnswers],
+                               kLoosesKey : [NSNumber numberWithInteger:self.oneRound.wrongAnswers],
+                               kPlayedKey : self.playedQuestions};
+    [saveData writeToURL:self.persistanceURL atomically:YES];
 }
 
 - (void)dealloc

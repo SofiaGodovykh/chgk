@@ -112,7 +112,6 @@
                        self.oneRound.wrongAnswers];
     
     [self.delegate downloadSingleQuestion];
-    // Do any additional setup after loading the view from its nib.
 }
 
 @end

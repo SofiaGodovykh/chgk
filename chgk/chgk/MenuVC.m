@@ -18,13 +18,13 @@
 
 @implementation MenuVC
 
+//TODO: I totaly don't like how startGamePressed and continueGamePressed actions works.
 - (IBAction)startGamePressed:(id)sender
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     [self.navigationController pushViewController:questionVC animated:YES];
     
     if ((!self.navigationController)&&(!!self.delegate)){
-        //TODO: think more about such solution. Isn't it a leak?
         [self.delegate stopTimer];
         UINavigationController *mainNC = [[UINavigationController alloc]
                                           initWithRootViewController:questionVC];
@@ -37,6 +37,11 @@
 {
     if (!!self.delegate){
         [self.delegate removeMenu];
+    }
+    else {
+        QuestionVC *questionVC = [[QuestionVC alloc] init];
+        [questionVC continuePreviousGame];
+        [self.navigationController pushViewController:questionVC animated:YES];
     }
 }
 

@@ -45,6 +45,7 @@
         
         _database = [FMDatabase databaseWithPath:path];
         [_database open];
+        //don't forget to remove it
         [_database executeUpdate:@"delete from Exercise"];
         [_database executeUpdate:@"create table if not exists Exercise(idByOrder int, question text, answer text, annotation text, authors text, sources text, picture text, id int)"];
     }
@@ -82,7 +83,7 @@
 
 - (void)dealloc
 {
-   [self.database close];
+    [self.database close];
 }
 
 @end
