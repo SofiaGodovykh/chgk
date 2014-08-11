@@ -184,6 +184,8 @@ static NSString *const kPlayedKey = @"score";
             text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
             text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
             self.question.text = text;
+            
+            [database addToFavorite: [database getID]];
         }
         else{
             NSLog(@"Parse.com error: %@ %@", error, [error userInfo]);

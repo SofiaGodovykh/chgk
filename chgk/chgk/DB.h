@@ -17,4 +17,11 @@
  *  Returns the shared database object.
  */
 + (instancetype)standardBase;
+
+-(NSArray*)getBunchOfQuestions;
+
+-(void)addToFavorite:(NSInteger) idByOrder;
+
+-(NSInteger)getID;
+
 @end
