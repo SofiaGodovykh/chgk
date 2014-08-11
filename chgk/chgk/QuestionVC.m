@@ -12,6 +12,7 @@
 #import "Question.h"
 #import "MenuVC.h"
 #import "ContinueDelegate.h"
+#import "DB.h"
 #import <Parse/Parse.h>
 
 static const NSUInteger TimerMaximumSeconds = 60;
@@ -129,12 +130,21 @@ static const NSUInteger TimerMaximumSeconds = 60;
     int ind = arc4random() % 10219;
 //    ind = 9507; //for test
     NSLog(@"Downloading %d question...", ind);
-    NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder = %d)",ind];
+    NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder > %d)",ind];
     PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
-    questQuery.limit = 1;
+    questQuery.limit = 1000;
     [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if ( (!error) && ([objects count]>0) ){
+            
             self.oneRound.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
+            
+            NSMutableArray *someQuestions = [NSMutableArray array];
+            for (PFObject *object in objects){
+                [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
+            }
+            DB *database = [[DB alloc]init];
+            [database addItemsInExercise:[someQuestions copy]];
+            
             NSString *text = [self.oneRound.currentQuestion.question
                               stringByTrimmingCharactersInSet:
                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];

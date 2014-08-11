@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "MenuVC.h"
 #import <Parse/Parse.h>
-
+#import "DB.h"
 
 @implementation AppDelegate
 
@@ -31,6 +31,8 @@
     mainNC.navigationBar.translucent = NO;
     self.window.rootViewController = mainNC;
 
+    DB *db = [[DB alloc] init];
+    
     return YES;
 }
 

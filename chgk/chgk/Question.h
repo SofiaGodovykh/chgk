@@ -18,6 +18,8 @@
 @property (nonatomic, copy, readonly) NSString *authors;
 @property (nonatomic, copy, readonly) NSString *sources;
 @property (nonatomic, copy, readonly) NSString *pictureName;
+@property (nonatomic, readonly) NSInteger ID;
+@property (nonatomic, readonly) NSInteger IdByOrder;
 
 - (instancetype)initWithParseObject:(PFObject *)object;
 - (id)init NS_UNAVAILABLE;

@@ -17,6 +17,8 @@
 @property (nonatomic, copy) NSString *authors;
 @property (nonatomic, copy) NSString *sources;
 @property (nonatomic, copy) NSString *pictureName;
+@property (nonatomic) NSInteger ID;
+@property (nonatomic) NSInteger IdByOrder;
 
 @end
 
@@ -28,6 +30,8 @@
 @synthesize authors = authors_;
 @synthesize sources = sources_;
 @synthesize pictureName = pictureName_;
+@synthesize ID = ID_;
+@synthesize IdByOrder = IdByOrder_;
 
 - (id)init
 {
@@ -46,6 +50,9 @@
         authors_ = object[@"Authors"];
         sources_ = object[@"Sources"];
         pictureName_ = object[@"PictureName"];
+        ID_ = [object[@"Id"] intValue];
+        IdByOrder_ = [object[@"IdByOrder"] intValue];
+        
     }
     
     return self;
