@@ -13,26 +13,40 @@
 @interface DB()
 
 @property (nonatomic)  FMDatabase* database;
+
 @property (nonatomic, strong, readonly) NSString* path;
+
 @end
 
+
 @implementation DB
+
++ (instancetype)standardBase
+{
+    static dispatch_once_t onceToken = 0;
+    static DB *standardBase_ = nil;
+    dispatch_once(&onceToken, ^{
+        standardBase_ = [[self alloc] init];
+    });
+    
+    return standardBase_;
+}
 
 
 - (DB *)init
 {
-    if(self == [super init])
-    {
-        NSString *path = @"/Users/signatov/Documents/kk/database.sqlite";
+    if(self == [super init]){
+//        NSString *path = @"/Users/signatov/Documents/kk/database.sqlite";
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
+                                                             NSUserDomainMask,
+                                                             YES);
+        NSString *path = paths[0];
+        path = [path stringByAppendingPathComponent:@"chgkDB.sqlite"];
         
         _database = [FMDatabase databaseWithPath:path];
         [_database open];
+        [_database executeUpdate:@"delete from Exercise"];
         [_database executeUpdate:@"create table if not exists Exercise(idByOrder int, question text, answer text, annotation text, authors text, sources text, picture text, id int)"];
-        
-//        NSString *query = [NSString stringWithFormat:@"insert into Exercise values (%d, '%@', '%@', '%@', '%@', '%@', '%@', %d, '%@')", arc4random(), @"question1", @"answer1", @"annotation1", @"authors1", @"sources1", @"picture1", 1, @"11"];
-        
-//        [_database executeUpdate:query];
-        //[_database close];
     }
     
     return self;
@@ -42,41 +56,33 @@
 {
     FMDatabaseQueue *queue = [[FMDatabaseQueue alloc] initWithPath: self.path];
     [queue inDatabase:^(FMDatabase *database)
-     {
-         [_database beginTransaction];
-         for(Question *question in items)
-         {
-             NSString *pic = question.pictureName;
-             if(pic == nil)
-             {
-                 pic = @"";
-             }
-//             NSString *query = [NSString stringWithFormat:@"insert into Exercise values (%d, '%@', '%@', '%@', '%@', '%@', '%@', %d, '%@')", arc4random(), @"question1", @"answer1", @"annotation1", @"authors1", @"sources1", @"picture1", 1, @"11"];
-
-//             [_database executeUpdate:[NSString stringWithFormat: @"insert into Exercise values (%ld, '%@', '%@', '%@', '%@', '%@', '%@', %ld)", question.IdByOrder, question.question, question.answer, question.annotation, question.authors, question.sources, pic, question.ID]];
-             
-//             NSString *query = [NSString stringWithFormat:@"insert into Exercise(idByOrder, question, answer, annotation, authors, sources, picture, id) values(?,?,?,?,?,?,?,?)"];
-             [self.database executeUpdate:@"insert into Exercise(idByOrder, question, answer, annotation, authors, sources, picture, id) values(?,?,?,?,?,?,?,?)",[NSNumber numberWithInteger:question.IdByOrder], question.question, question.answer, question.annotation, question.authors, question.sources, pic, [NSNumber numberWithInteger:question.ID]];
+    {
+         [self.database beginTransaction];
+         for(Question *question in items) {
+             [self.database executeUpdate:@"insert into Exercise(idByOrder, question, answer, annotation, authors, sources, picture, id) values(?,?,?,?,?,?,?,?)",
+              [NSNumber numberWithInteger:question.IdByOrder],
+              question.question,
+              question.answer,
+              question.annotation,
+              question.authors,
+              question.sources,
+              question.pictureName,
+              [NSNumber numberWithInteger:question.ID]];
              
          }
-         
-         [_database commit];
-         //[_database close];
+         [self.database commit];
      }];
     NSLog(@"%ld", [self countOfItemsInExercise]);
 }
 
 - (NSInteger)countOfItemsInExercise
 {
-   // FMResultSet *result = [self.database executeQuery:@"select (*) from Exercise"];
-    NSUInteger count = [self.database intForQuery:@"SELECT COUNT(*) FROM Exercise"];
-    return count;
+    return [self.database intForQuery:@"SELECT COUNT(*) FROM Exercise"];
 }
-
 
 - (void)dealloc
 {
-   [_database close];
+   [self.database close];
 }
 
 @end

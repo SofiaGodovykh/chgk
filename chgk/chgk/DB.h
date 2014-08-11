@@ -10,7 +10,11 @@
 
 @interface DB : NSObject
 
--(void) addItemsInExercise: (NSArray* )items;
+- (void)addItemsInExercise:(NSArray* )items;
 - (NSInteger)countOfItemsInExercise;
 
+/**
+ *  Returns the shared database object.
+ */
++ (instancetype)standardBase;
 @end

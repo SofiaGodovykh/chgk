@@ -86,6 +86,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 - (IBAction)confirmPressed:(id)sender
 {
     [self dismissKeyboard];
+    [self stopTimer];
     self.oneRound.playerAnswer = self.answer.text;
 //TODO: send copy of oneRound
     AnswerVC *modalAnswer = [[AnswerVC alloc]initWithRound:self.oneRound];
@@ -128,7 +129,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 - (void)downloadSingleQuestion
 {
     self.question.text = @"Загрузка вопроса...";
-    int ind = arc4random() % 10219;
+    int ind = arc4random() % 17589;
 //    ind = 9507; //for test
     NSLog(@"Downloading %d question...", ind);
     NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder > %d)",ind];
@@ -136,16 +137,19 @@ static const NSUInteger TimerMaximumSeconds = 60;
     questQuery.limit = 1000;
     [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if ( (!error) && ([objects count]>0) ){
+
+            DB *database = [DB standardBase];
+            if ([database countOfItemsInExercise] < 50000 ){
             
-            self.oneRound.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
-            
-            NSMutableArray *someQuestions = [NSMutableArray array];
-            for (PFObject *object in objects){
-                [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
+                NSMutableArray *someQuestions = [NSMutableArray array];
+                for (PFObject *object in objects){
+                    [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
+                }
+                
+                [database addItemsInExercise:[someQuestions copy]];
             }
-            DB *database = [[DB alloc]init];
-            [database addItemsInExercise:[someQuestions copy]];
-            
+
+            self.oneRound.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
             NSString *text = [self.oneRound.currentQuestion.question
                               stringByTrimmingCharactersInSet:
                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];

@@ -49,7 +49,11 @@
         annotation_ = object[@"Annotation"];
         authors_ = object[@"Authors"];
         sources_ = object[@"Sources"];
-        pictureName_ = object[@"PictureName"];
+        NSString *picName = object[@"PictureName"];
+        if (!picName){
+            picName = @"";
+        }
+        pictureName_ = picName;
         ID_ = [object[@"Id"] intValue];
         IdByOrder_ = [object[@"IdByOrder"] intValue];
         

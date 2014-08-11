@@ -31,8 +31,6 @@
     mainNC.navigationBar.translucent = NO;
     self.window.rootViewController = mainNC;
 
-    DB *db = [[DB alloc] init];
-    
     return YES;
 }
 
