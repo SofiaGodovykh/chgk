@@ -135,6 +135,9 @@
                         <color key="titleColor" red="1" green="0.047582545186654057" blue="0.21416055963896274" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="endGamePressed:" destination="-1" eventType="touchUpInside" id="SAZ-I0-qVn"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If6-sC-R4r">
                     <rect key="frame" x="10" y="299" width="50" height="40"/>

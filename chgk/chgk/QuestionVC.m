@@ -159,6 +159,13 @@ static NSString *const kPlayedKey = @"score";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)answerVC:(AnswerVC *)sender didFinishedWithView:(UIViewController *)viewController
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self stopTimer];
+    [self.navigationController setViewControllers:[NSArray arrayWithObject:viewController] animated:YES];
+}
+
 - (void)nextQuestionAfterAnswer:(BOOL)isRight
 {
     self.timerLabel.text = @"01:00";

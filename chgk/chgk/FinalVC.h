@@ -12,12 +12,14 @@
 
 @protocol FinalVCViewControllerDelegate <NSObject>
 
-- (void)finalVCdidFinish:(FinalVC *)sender ;
+- (void)finalVCdidFinish:(FinalVC *)sender withView:(UIViewController *)viewController;
 
 @end
 
 @interface FinalVC : UIViewController
 
 @property (nonatomic, weak) id<FinalVCViewControllerDelegate> delegate;
+
+- (instancetype)initWithRight:(int)right andWrongAnswers:(int)wrong;
 
 @end

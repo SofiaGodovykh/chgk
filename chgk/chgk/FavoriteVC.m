@@ -42,7 +42,7 @@
                                        action:@selector(didTouchOKBarButtonItem:)];;
         [self.navigationItem setRightBarButtonItem:okBarButtonItem];
     }
-
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //TODO: add a table
 //    self.label1.text = answers;
 
@@ -73,7 +73,9 @@
     tableViewCell.detailTextLabel.font  = [UIFont systemFontOfSize:9];
     tableViewCell.detailTextLabel.textColor = [UIColor darkGrayColor];
     
-    NSString *title = [NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [[self.questions objectAtIndex:indexPath.row] answer]];
+    NSString *title = [NSString stringWithFormat:@"%ld. %@",
+                       indexPath.row+1,
+                       [[self.questions objectAtIndex:indexPath.row] answer]];
     tableViewCell.textLabel.text = title;
     tableViewCell.detailTextLabel.text = [[self.questions objectAtIndex:indexPath.row] question];
     return tableViewCell;

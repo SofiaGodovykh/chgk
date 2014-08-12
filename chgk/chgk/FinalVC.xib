@@ -20,7 +20,7 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfG-Fc-Qhq">
                     <rect key="frame" x="85" y="145" width="150" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="0.94347100070000001" blue="0.048157939730000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="CNC-dl-j60"/>
                         <constraint firstAttribute="width" constant="150" id="NA1-HT-377"/>
@@ -38,6 +38,9 @@
                     <state key="normal" title="Новая игра">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="startGamePressed:" destination="-1" eventType="touchUpInside" id="coV-uE-BdZ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1G-nW-mvx">
                     <rect key="frame" x="85" y="315" width="150" height="30"/>
@@ -50,7 +53,7 @@
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="4gk-U5-4ir" firstAttribute="top" secondItem="MfG-Fc-Qhq" secondAttribute="bottom" constant="50" id="8AP-GW-8ly"/>
                 <constraint firstItem="MfG-Fc-Qhq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="145" id="GkF-vI-Td7"/>

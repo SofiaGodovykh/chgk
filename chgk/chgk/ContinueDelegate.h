@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class AnswerVC;
+
 @protocol ContinueDelegate <NSObject>
 
 - (void)removeMenu;
 - (void)nextQuestionAfterAnswer:(BOOL)isRight;
 - (void)questionsWatchDog;
 - (void)stopTimer;
+- (void)answerVC:(AnswerVC *)sender didFinishedWithView:(UIViewController *)viewController;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "FinalVC.h"
+#import "MenuVC.h"
+#import "QuestionVC.h"
 
 @interface FinalVC ()
 
@@ -14,15 +16,21 @@
 @property (nonatomic, weak) IBOutlet UIButton *startGameButton;
 @property (nonatomic, weak) IBOutlet UIButton *statistic;
 
+@property (nonatomic) int rightAnswers;
+@property (nonatomic) int wrongAnswers;
+
 @end
 
 @implementation FinalVC
+@synthesize rightAnswers = rightAnswers_;
+@synthesize wrongAnswers = wrongAnswers_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (instancetype)initWithRight:(int)right andWrongAnswers:(int)wrong
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self = [super init]){
+        rightAnswers_ = right;
+        wrongAnswers_ = wrong;
     }
     return self;
 }
@@ -30,7 +38,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.scoreLabel.text = [NSString stringWithFormat:@"%02d:%02d",
+                            self.rightAnswers,
+                            self.wrongAnswers];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (IBAction)startGamePressed:(id)sender
+{
+    QuestionVC *questionVC = [[QuestionVC alloc]init];
+    [self.delegate finalVCdidFinish:self withView:questionVC];
 }
 
 @end
