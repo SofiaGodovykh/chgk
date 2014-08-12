@@ -17,6 +17,9 @@
 
 static const NSUInteger TimerMaximumSeconds = 60;
 static const NSUInteger NumberOfQuestionInDatabase = 17589;
+static const NSUInteger NumberOfQuestionForDownload = 100;
+static const NSUInteger MinimumNumberOfQuestionInDatabase = 200;
+
 static NSString *const DefaultFileNameForLocalStore = @"PlayedQuestionsAndScore.dat";
 static NSString *const kWinsKey = @"wins";
 static NSString *const kLoosesKey = @"looses";
@@ -172,13 +175,16 @@ static NSString *const kPlayedKey = @"score";
 {
     DB *database = [DB standardBase];
     NSInteger questionCountInSqlDB = [database countOfItemsInExercise];
-    if ( questionCountInSqlDB < 50 ){
+    
+    [database getQuestionsById:[database getID]];
+    
+    if ( questionCountInSqlDB < MinimumNumberOfQuestionInDatabase ){
         int ind = arc4random() % NumberOfQuestionInDatabase;
         //    ind = 9507; //for test
         NSLog(@"Downloading %d question...", ind);
         NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder > %d)",ind];
         PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
-        questQuery.limit = 65;
+        questQuery.limit = NumberOfQuestionForDownload;
         if ( questionCountInSqlDB == 0 ) {
             NSArray *parseOutput = [questQuery findObjects];
             NSMutableArray *someQuestions = [NSMutableArray array];
@@ -186,6 +192,7 @@ static NSString *const kPlayedKey = @"score";
                 [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
             }
             [database addItemsInExercise:[someQuestions copy]];
+        
         }else{
             [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if ( (!error) && ([objects count]>0) ){

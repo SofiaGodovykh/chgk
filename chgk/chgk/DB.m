@@ -36,7 +36,7 @@
 - (DB *)init
 {
     if(self == [super init]){
-        NSString *path = @"/Users/signatov/Documents/kk/database.sqlite";
+        NSString *path = @"/Users/admin/Documents/kk/database.sqlite";
         //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
                                                     //         NSUserDomainMask,
                                                      //        YES);
@@ -69,12 +69,12 @@
               question.sources,
               question.pictureName,
               [NSNumber numberWithInteger:question.ID],
-              [NSNumber numberWithInt:0],
-              [NSNumber numberWithInt:0]];
+              @0,
+              @0];
          }
          [self.database commit];
      }];
-    NSLog(@"%ld", [self countOfItemsInExercise]);
+    NSLog(@"Number of question in sql DB : %ld", [self countOfItemsInExercise]);
 }
 
 - (NSInteger)countOfItemsInExercise
@@ -84,7 +84,7 @@
 
 -(NSArray*)bunchOfQuestions
 {
-    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise WHERE isUsed=0 group by random() limit 3"];
+    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise WHERE isUsed=0 group by random() limit 10"];
     NSMutableArray *array = [NSMutableArray array];
     
     while([result next])
@@ -140,6 +140,19 @@
     NSMutableString *update = [[NSMutableString alloc] initWithString: @"UPDATE Exercise SET isFavorited=0 where idByOrder="];
     [update appendFormat:@"%ld", (long)idByOrder];
     [self.database executeUpdate: update];
+}
+
+-(Question*)getQuestionsById:(NSInteger) key
+{
+    NSString *str = [NSString stringWithFormat:@"SELECT * FROM Exercise where idByOrder = %ld", key];
+    FMResultSet *result = [self.database executeQuery: str];
+    while ([result next])
+    {
+        Question *question = [[Question alloc] initWithDictionary:[result resultDictionary]];
+        return question;
+    }
+    
+    return nil;
 }
 
 -(NSInteger)getID

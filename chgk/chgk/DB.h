@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Question.h"
 
 @interface DB : NSObject
 
@@ -23,5 +24,5 @@
 -(void)addToFavorite:(NSInteger) idByOrder;
 -(NSArray*)getAllFavs;
 -(NSInteger)getID;
-
+-(Question*)getQuestionsById:(NSInteger) key;
 @end
