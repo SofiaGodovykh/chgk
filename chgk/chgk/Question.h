@@ -22,6 +22,7 @@
 @property (nonatomic, readonly) NSInteger IdByOrder;
 
 - (instancetype)initWithParseObject:(PFObject *)object;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (id)init NS_UNAVAILABLE;
 
 @end

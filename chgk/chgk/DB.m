@@ -36,7 +36,7 @@
 - (DB *)init
 {
     if(self == [super init]){
-        NSString *path = @"/Users/sone4ka/Documents/kk/database.sqlite";
+        NSString *path = @"/Users/signatov/Documents/kk/database.sqlite";
         //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
                                                     //         NSUserDomainMask,
                                                      //        YES);
@@ -46,7 +46,7 @@
         _database = [FMDatabase databaseWithPath:path];
         [_database open];
         //don't forget to remove it
-        [_database executeUpdate:@"delete from Exercise"];
+        //[_database executeUpdate:@"delete from Exercise"];
         [_database executeUpdate:@"create table if not exists Exercise(idByOrder int primary key, question text, answer text, annotation text, authors text, sources text, picture text, id int, isUsed int, isFavorited int)"];
     }
     
@@ -89,15 +89,16 @@
     
     while([result next])
     {
-        [array addObject:[result resultDictionary]];
+        [array addObject:[[Question alloc] initWithDictionary:[result resultDictionary]]];
     }
     
     NSMutableString *ids = [[NSMutableString alloc] initWithString:@""];
 
     for (int i = 0; i < [array count]; i++)
     {
-        NSMutableString *idFromDictionary = [NSMutableString alloc];
-        idFromDictionary = [NSMutableString stringWithFormat:@"%@", [(NSDictionary*)[array objectAtIndex:i] valueForKey: @"idByOrder"]];
+        NSMutableString *idFromDictionary = [NSMutableString stringWithFormat:
+                                             @"%ld",
+                                             [array[i] IdByOrder]];
         [ids appendString: idFromDictionary];
         [ids appendString:@","];
     }
@@ -112,7 +113,7 @@
     [update appendString:@")"];
    [self.database executeUpdate: update];
     
-    return array;
+    return [array copy];
 }
 
 -(void)addToFavorite:(NSInteger) idByOrder
@@ -128,7 +129,7 @@
     FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise where isFavorited=1"];
     while([result next])
     {
-        [array addObject:[result resultDictionary]];
+        [array addObject:[[Question alloc] initWithDictionary:[result resultDictionary] ]];
     }
     
     return array;

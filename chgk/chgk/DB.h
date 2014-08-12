@@ -21,7 +21,7 @@
 -(NSArray*)getBunchOfQuestions;
 
 -(void)addToFavorite:(NSInteger) idByOrder;
-
+-(NSArray*)getAllFavs;
 -(NSInteger)getID;
 
 @end

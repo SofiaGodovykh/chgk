@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "DB.h"
 
 @interface chgkTests : XCTestCase
 
@@ -26,9 +27,19 @@
     [super tearDown];
 }
 
-- (void)testExample
+//- (void)testExample
+//{
+//    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+//}
+
+- (void)testBunchOfQuestions
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    NSLog(@"In Exercise are %ld rows", [[DB standardBase] countOfItemsInExercise]);
+    NSArray *bunch = [[DB standardBase] getBunchOfQuestions];
+    if ([bunch count]==0) {
+        XCTFail(@"No question selected from database");
+    }
 }
+
 
 @end

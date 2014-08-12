@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnswerVC">
             <connections>
+                <outlet property="addToFavoriteButton" destination="eaf-0K-b8N" id="1V8-oP-m3P"/>
                 <outlet property="annotationView" destination="xxI-dU-0X6" id="FhE-I0-dfQ"/>
                 <outlet property="correctAnswer" destination="b2E-mK-beI" id="JfY-FC-H2m"/>
                 <outlet property="endGame" destination="uhh-56-UZC" id="iq7-38-8fT"/>
@@ -125,12 +126,22 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If6-sC-R4r">
                     <rect key="frame" x="10" y="299" width="50" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="0.91966246890000003" blue="0.2461449215" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="QeQ-Oa-12D"/>
                         <constraint firstAttribute="width" constant="50" id="zQb-BB-tPR"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaf-0K-b8N">
+                    <rect key="frame" x="33" y="22" width="153" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Добавить в закладки">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addToFavoritePressed:" destination="-1" eventType="touchUpInside" id="7iy-nF-tMj"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.90196084976196289" green="0.90196084976196289" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
             <constraints>

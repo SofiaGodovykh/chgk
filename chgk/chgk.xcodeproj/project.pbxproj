@@ -28,6 +28,8 @@
 		80C8B8941998E0490080290F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B88C1998E0490080290F /* FMDatabasePool.m */; };
 		80C8B8951998E0490080290F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B88E1998E0490080290F /* FMDatabaseQueue.m */; };
 		80C8B8961998E0490080290F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B8911998E0490080290F /* FMResultSet.m */; };
+		80C8B89D1999C81B0080290F /* FavoriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C8B89B1999C81B0080290F /* FavoriteVC.m */; };
+		80C8B89E1999C81B0080290F /* FavoriteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80C8B89C1999C81B0080290F /* FavoriteVC.xib */; };
 		842E5BC31998AAD70062E582 /* DB.m in Sources */ = {isa = PBXBuildFile; fileRef = 842E5BC21998AAD70062E582 /* DB.m */; };
 		842E5BDF1998ADA00062E582 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842E5BDE1998ADA00062E582 /* libsqlite3.0.dylib */; };
 		849F74591990C5A40051CF7E /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F74571990C5A40051CF7E /* QuestionVC.m */; };
@@ -91,6 +93,9 @@
 		80C8B88F1998E0490080290F /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		80C8B8901998E0490080290F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		80C8B8911998E0490080290F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		80C8B89A1999C81B0080290F /* FavoriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteVC.h; sourceTree = "<group>"; };
+		80C8B89B1999C81B0080290F /* FavoriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteVC.m; sourceTree = "<group>"; };
+		80C8B89C1999C81B0080290F /* FavoriteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteVC.xib; sourceTree = "<group>"; };
 		842E5BC11998AAD70062E582 /* DB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB.h; sourceTree = "<group>"; };
 		842E5BC21998AAD70062E582 /* DB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB.m; sourceTree = "<group>"; };
 		842E5BDE1998ADA00062E582 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -234,6 +239,9 @@
 				80C8B8581991019A0080290F /* MenuVC.m */,
 				80C8B8591991019A0080290F /* MenuVC.xib */,
 				84DE109E198603860058C5B4 /* Images.xcassets */,
+				80C8B89A1999C81B0080290F /* FavoriteVC.h */,
+				80C8B89B1999C81B0080290F /* FavoriteVC.m */,
+				80C8B89C1999C81B0080290F /* FavoriteVC.xib */,
 				849F745B1990D7760051CF7E /* timerIcon.png */,
 				849F745C1990D7760051CF7E /* timerIcon@2x.png */,
 				84DE1093198603860058C5B4 /* Supporting Files */,
@@ -345,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C8B89E1999C81B0080290F /* FavoriteVC.xib in Resources */,
 				849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */,
 				849F745E1990D7760051CF7E /* timerIcon@2x.png in Resources */,
 				84DE1097198603860058C5B4 /* InfoPlist.strings in Resources */,
@@ -382,6 +391,7 @@
 				842E5BC31998AAD70062E582 /* DB.m in Sources */,
 				80C8B8641992351B0080290F /* OneRound.m in Sources */,
 				84DE1099198603860058C5B4 /* main.m in Sources */,
+				80C8B89D1999C81B0080290F /* FavoriteVC.m in Sources */,
 				80C8B8931998E0490080290F /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

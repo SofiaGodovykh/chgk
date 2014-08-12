@@ -9,12 +9,14 @@
 #import "AnswerVC.h"
 #import "OneRound.h"
 #import "Question.h"
+#import "DB.h"
 
 @interface AnswerVC ()
 
 @property (nonatomic, weak) IBOutlet UIButton *makeCorrectButton;
 @property (nonatomic, weak) IBOutlet UIButton *nextQuestion;
 @property (nonatomic, weak) IBOutlet UIButton *endGame;
+@property (nonatomic, weak) IBOutlet UIButton *addToFavoriteButton;
 @property (nonatomic, weak) IBOutlet UITextView *correctAnswer;
 @property (nonatomic, weak) IBOutlet UITextView *playerAnswer;
 @property (nonatomic, weak) IBOutlet UILabel *score;
@@ -88,6 +90,11 @@
 - (IBAction)makeCorrectPressed:(id)sender
 {
     [self.delegate nextQuestionAfterAnswer:YES];
+}
+
+- (IBAction)addToFavoritePressed:(id)sender
+{
+    [[DB standardBase] addToFavorite:self.oneRound.currentQuestion.IdByOrder];
 }
 
 - (void)viewDidLoad

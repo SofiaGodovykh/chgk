@@ -62,4 +62,19 @@
     return self;
 }
 
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    if (self=[super init]){
+        question_ = [dictionary objectForKey:@"question"];
+        answer_ = [dictionary objectForKey:@"answer"];
+        annotation_ = [dictionary objectForKey:@"annotation"];
+        authors_ = [dictionary objectForKey:@"authors"];
+        sources_ = [dictionary objectForKey:@"sources"];
+        pictureName_ = [dictionary objectForKey:@"picture"];
+        ID_ = [[dictionary objectForKey:@"id"] integerValue];
+        IdByOrder_ = [[dictionary objectForKey:@"idByOrder"] integerValue];
+    }
+    return self;
+}
+
 @end
