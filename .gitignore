@@ -1,5 +1,7 @@
 .DC_Store
 
+chgk/chgk.xcodeproj/project.xcworkspace/xcuserdata/*
+
 chgk/chgk.xcodeproj/project.xcworkspace/*
 !contents.xcworkspacedata
 
