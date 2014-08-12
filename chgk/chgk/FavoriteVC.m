@@ -10,11 +10,26 @@
 #import "DB.h"
 #import "Question.h"
 
-@interface FavoriteVC ()
-@property (nonatomic, weak) IBOutlet UILabel *label1;
+@interface FavoriteVC () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) NSArray *questions;
+
 @end
 
 @implementation FavoriteVC
+
+@synthesize questions = questions_;
+@synthesize tableView = tableView_;
+
+- (instancetype)initWithQuestions:(NSArray *)questions
+{
+    if (self = [super init]){
+        questions_ = questions;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -27,18 +42,9 @@
                                        action:@selector(didTouchOKBarButtonItem:)];;
         [self.navigationItem setRightBarButtonItem:okBarButtonItem];
     }
-    
-    
-    NSMutableString *answers = [NSMutableString string];
-    NSArray *favArray = [[DB standardBase] getAllFavs];
-    
-    int i = 0;
-    for ( Question *quest in favArray){
-        [answers appendFormat:@"%d  :  %@\n", i, quest.answer];
-        i++;
-    }
+
     //TODO: add a table
-    self.label1.text = answers;
+//    self.label1.text = answers;
 
     
     
@@ -48,5 +54,30 @@
 {
     [self.delegate favoriteVCdidFinish:self];
 }
+
+- (NSInteger)tableView:(UITableView *)tableView
+             numberOfRowsInSection:(NSInteger)section
+{
+    return [self.questions count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+                     cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"ReusableCellID";
+    UITableViewCell *tableViewCell = [[UITableViewCell alloc]
+                                      initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:CellIdentifier];
+    tableViewCell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+    tableViewCell.textLabel.font  = [UIFont systemFontOfSize:11];
+    tableViewCell.detailTextLabel.font  = [UIFont systemFontOfSize:9];
+    tableViewCell.detailTextLabel.textColor = [UIColor darkGrayColor];
+    
+    NSString *title = [NSString stringWithFormat:@"%ld. %@", indexPath.row+1, [[self.questions objectAtIndex:indexPath.row] answer]];
+    tableViewCell.textLabel.text = title;
+    tableViewCell.detailTextLabel.text = [[self.questions objectAtIndex:indexPath.row] question];
+    return tableViewCell;
+}
+
 
 @end

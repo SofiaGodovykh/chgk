@@ -176,8 +176,6 @@ static NSString *const kPlayedKey = @"score";
     DB *database = [DB standardBase];
     NSInteger questionCountInSqlDB = [database countOfItemsInExercise];
     
-    [database getQuestionsById:[database getID]];
-    
     if ( questionCountInSqlDB < MinimumNumberOfQuestionInDatabase ){
         int ind = arc4random() % NumberOfQuestionInDatabase;
         //    ind = 9507; //for test
