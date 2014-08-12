@@ -49,7 +49,7 @@
 
 - (IBAction)favoritePressed:(id)sender
 {
-    FavoriteVC *favoriteVC = [[FavoriteVC alloc]init];
+    FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:[[DB standardBase] getAllFavs]];
     favoriteVC.delegate = self;
     UINavigationController *const navigationController =
     [[UINavigationController alloc] initWithRootViewController:favoriteVC];

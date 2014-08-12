@@ -20,4 +20,6 @@
 
 @property (nonatomic, weak) id<FavoriteVCDelegate> delegate;
 
+- (instancetype)initWithQuestions:(NSArray *)questions;
+
 @end
