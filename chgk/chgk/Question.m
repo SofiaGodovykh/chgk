@@ -44,16 +44,16 @@
 - (instancetype)initWithParseObject:(PFObject *)object
 {
     if (self = [super init]){
-        question_ = object[@"Question"];
-        answer_ = object[@"Answer"];
-        annotation_ = object[@"Annotation"];
-        authors_ = object[@"Authors"];
+        question_ = [self trimString:object[@"Question"]];
+        answer_ = [self trimString:object[@"Answer"]];
+        annotation_ = [self trimString:object[@"Annotation"]];
+        authors_ = [self trimString:object[@"Authors"]];
         sources_ = object[@"Sources"];
         NSString *picName = object[@"PictureName"];
         if (!picName){
             picName = @"";
         }
-        pictureName_ = picName;
+        pictureName_ = [self trimString:picName];
         ID_ = [object[@"Id"] intValue];
         IdByOrder_ = [object[@"IdByOrder"] intValue];
         
@@ -65,16 +65,39 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     if (self=[super init]){
-        question_ = [dictionary objectForKey:@"question"];
-        answer_ = [dictionary objectForKey:@"answer"];
-        annotation_ = [dictionary objectForKey:@"annotation"];
-        authors_ = [dictionary objectForKey:@"authors"];
+        question_ = [self trimString:[dictionary objectForKey:@"question"]];
+        answer_ = [self trimString:[dictionary objectForKey:@"answer"]];
+        annotation_ = [self trimString:[dictionary objectForKey:@"annotation"]];
+        authors_ = [self trimString:[dictionary objectForKey:@"authors"]];
         sources_ = [dictionary objectForKey:@"sources"];
-        pictureName_ = [dictionary objectForKey:@"picture"];
+        pictureName_ = [self trimString:[dictionary objectForKey:@"picture"]];
         ID_ = [[dictionary objectForKey:@"id"] integerValue];
         IdByOrder_ = [[dictionary objectForKey:@"idByOrder"] integerValue];
     }
     return self;
+}
+
+- (NSString *)trimString:(NSString *)string
+{
+    NSString *text = [string stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+    return text;
+}
+
+- (NSString *)description
+{
+    NSMutableString *text = [NSMutableString string];
+    [text appendString:@"Вопрос:\n"];
+    [text appendString:self.question];
+    [text appendString:@"\n\nОтвет:\n"];
+    [text appendString:self.answer];
+    [text appendString:@"\n\nАннотация:\n"];
+    [text appendString:self.annotation];
+    [text appendString:@"\n\nАвторы:\n"];
+    [text appendString:self.authors];
+    [text appendString:@"\n\nИсточники:\n"];
+    [text appendString:self.sources];
+    return [text copy];
 }
 
 @end

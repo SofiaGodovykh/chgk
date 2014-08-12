@@ -106,7 +106,9 @@
     int right = self.oneRound.rightAnswers;
     int wrong = self.oneRound.wrongAnswers;
     self.isRight ? right++ : wrong ++;
-    FinalVC *finalVC = [[FinalVC alloc]initWithRight:right andWrongAnswers:wrong];
+    //TODO : do it
+    //FinalVC *finalVC = [[FinalVC alloc]initWithRight:right wrongAnswers:wrong playedID:<#(NSArray *)#>];
+    FinalVC *finalVC = [[FinalVC alloc]init];
     finalVC.delegate = self;
     
     [self presentViewController:finalVC

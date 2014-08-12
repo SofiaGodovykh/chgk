@@ -20,6 +20,6 @@
 
 @property (nonatomic, weak) id<FinalVCViewControllerDelegate> delegate;
 
-- (instancetype)initWithRight:(int)right andWrongAnswers:(int)wrong;
+- (instancetype)initWithRight:(int)right wrongAnswers:(int)wrong playedID:(NSArray *)played;
 
 @end

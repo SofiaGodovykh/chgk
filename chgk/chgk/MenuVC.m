@@ -49,6 +49,7 @@
 
 - (IBAction)favoritePressed:(id)sender
 {
+    //[self.delegate stopTimer];
     FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:[[DB standardBase] getAllFavs]];
     favoriteVC.delegate = self;
     UINavigationController *const navigationController =

@@ -8,9 +8,10 @@
 
 #import "FavoriteVC.h"
 #import "DB.h"
+#import "FullQuestionInfoVC.h"
 #import "Question.h"
 
-@interface FavoriteVC () <UITableViewDelegate, UITableViewDataSource>
+@interface FavoriteVC () <UITableViewDelegate, UITableViewDataSource, FullQuestionInfoVCDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -61,6 +62,11 @@
     return [self.questions count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
                      cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -69,8 +75,8 @@
                                       initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
     tableViewCell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
-    tableViewCell.textLabel.font  = [UIFont systemFontOfSize:11];
-    tableViewCell.detailTextLabel.font  = [UIFont systemFontOfSize:9];
+    tableViewCell.textLabel.font  = [UIFont systemFontOfSize:12];
+    tableViewCell.detailTextLabel.font  = [UIFont systemFontOfSize:10];
     tableViewCell.detailTextLabel.textColor = [UIColor darkGrayColor];
     
     NSString *title = [NSString stringWithFormat:@"%ld. %@",
@@ -78,8 +84,27 @@
                        [[self.questions objectAtIndex:indexPath.row] answer]];
     tableViewCell.textLabel.text = title;
     tableViewCell.detailTextLabel.text = [[self.questions objectAtIndex:indexPath.row] question];
+    tableViewCell.detailTextLabel.numberOfLines = 4;
     return tableViewCell;
 }
 
+
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FullQuestionInfoVC *const viewController = [[FullQuestionInfoVC alloc]
+                                                         initWithQuestion:self.questions[indexPath.row]];
+    viewController.delegate = self;
+    UINavigationController *const navigationController =
+    [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)FullQuestionInfoVCdidFinish:(FullQuestionInfoVC *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

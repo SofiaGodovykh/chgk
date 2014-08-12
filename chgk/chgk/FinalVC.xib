@@ -51,6 +51,9 @@
                     <state key="normal" title="Статистика">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="statisticPressed:" destination="-1" eventType="touchUpInside" id="uwh-63-0Hd"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>

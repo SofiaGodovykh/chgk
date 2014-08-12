@@ -15,7 +15,7 @@
 #import "DB.h"
 #import <Parse/Parse.h>
 
-static const NSUInteger TimerMaximumSeconds = 60;
+static const NSUInteger TimerMaximumSeconds = 5;
 static const NSUInteger NumberOfQuestionInDatabase = 17589;
 static const NSUInteger NumberOfQuestionForDownload = 100;
 static const NSUInteger MinimumNumberOfQuestionInDatabase = 200;
@@ -156,7 +156,12 @@ static NSString *const kPlayedKey = @"score";
 
 - (void)removeMenu
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if(self.seconds == 0) //when the minute expired
+        {
+            [self confirmPressed:nil];
+        }
+    }];
 }
 
 - (void)answerVC:(AnswerVC *)sender didFinishedWithView:(UIViewController *)viewController
@@ -267,7 +272,9 @@ static NSString *const kPlayedKey = @"score";
     NSLog(@"%@", time);
     if(self.seconds == 0 && !!self.timer) //when the minute expired
     {
-        [self confirmPressed:nil];
+        if (![self presentedViewController]){
+            [self confirmPressed:nil];
+        }
         [self stopTimer];
         NSLog(@"seconds os over");
         

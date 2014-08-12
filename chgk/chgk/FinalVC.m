@@ -8,6 +8,8 @@
 
 #import "FinalVC.h"
 #import "MenuVC.h"
+#import "FavoriteVC.h"
+#import "DB.h"
 #import "QuestionVC.h"
 
 @interface FinalVC ()
@@ -26,7 +28,7 @@
 @synthesize wrongAnswers = wrongAnswers_;
 
 
-- (instancetype)initWithRight:(int)right andWrongAnswers:(int)wrong
+- (instancetype)initWithRight:(int)right wrongAnswers:(int)wrong playedID:(NSArray *)played
 {
     if (self = [super init]){
         rightAnswers_ = right;
@@ -50,4 +52,11 @@
     [self.delegate finalVCdidFinish:self withView:questionVC];
 }
 
+- (IBAction)statisticPressed:(id)sender
+{
+    NSMutableArray *playedQuestions = [NSMutableArray array];
+    DB *database = [DB standardBase];
+    [playedQuestions addObject:[database getQuestionsById:12]];
+//    FavoriteVC *statisticVC = [FavoriteVC alloc]initWithQuestions:[DB standardBase]
+}
 @end
