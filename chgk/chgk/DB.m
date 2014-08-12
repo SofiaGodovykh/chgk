@@ -117,7 +117,7 @@
 
 -(void)addToFavorite:(NSInteger) idByOrder
 {
-    NSMutableString *update = [[NSMutableString alloc] initWithString: @"UPDATE Exercise SET isFavorite=1 where idByOrder="];
+    NSMutableString *update = [[NSMutableString alloc] initWithString: @"UPDATE Exercise SET isFavorited=1 where idByOrder="];
     [update appendFormat:@"%ld", (long)idByOrder];
     [self.database executeUpdate: update];
 }
