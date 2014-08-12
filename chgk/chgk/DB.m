@@ -82,9 +82,9 @@
     return [self.database intForQuery:@"SELECT COUNT(idByOrder) FROM Exercise WHERE isUsed=0"];
 }
 
--(NSArray*)getBunchOfQuestions
+-(NSArray*)bunchOfQuestions
 {
-    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise WHERE isUsed=0 group by random() limit 20"];
+    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise WHERE isUsed=0 group by random() limit 3"];
     NSMutableArray *array = [NSMutableArray array];
     
     while([result next])

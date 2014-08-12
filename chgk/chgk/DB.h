@@ -18,7 +18,7 @@
  */
 + (instancetype)standardBase;
 
--(NSArray*)getBunchOfQuestions;
+-(NSArray*)bunchOfQuestions;
 
 -(void)addToFavorite:(NSInteger) idByOrder;
 -(NSArray*)getAllFavs;

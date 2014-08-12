@@ -117,8 +117,7 @@
                        @"%d : %d",
                        self.oneRound.rightAnswers,
                        self.oneRound.wrongAnswers];
-    
-    [self.delegate downloadSingleQuestion];
+    [self.delegate questionsWatchDog];
 }
 
 @end

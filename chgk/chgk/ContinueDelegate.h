@@ -12,7 +12,7 @@
 
 - (void)removeMenu;
 - (void)nextQuestionAfterAnswer:(BOOL)isRight;
-- (void)downloadSingleQuestion;
+- (void)questionsWatchDog;
 - (void)stopTimer;
 
 @end

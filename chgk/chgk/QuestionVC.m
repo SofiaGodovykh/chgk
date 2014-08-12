@@ -16,6 +16,7 @@
 #import <Parse/Parse.h>
 
 static const NSUInteger TimerMaximumSeconds = 60;
+static const NSUInteger NumberOfQuestionInDatabase = 17589;
 static NSString *const DefaultFileNameForLocalStore = @"PlayedQuestionsAndScore.dat";
 static NSString *const kWinsKey = @"wins";
 static NSString *const kLoosesKey = @"looses";
@@ -36,6 +37,9 @@ static NSString *const kPlayedKey = @"score";
 @property (nonatomic, strong) OneRound *oneRound;
 @property (nonatomic, strong) NSMutableArray *playedQuestions;
 @property (nonatomic, strong) NSURL *persistanceURL;
+
+@property (nonatomic, strong) NSMutableArray *questionBuffer;
+
 @end
 
 @implementation QuestionVC
@@ -44,6 +48,7 @@ static NSString *const kPlayedKey = @"score";
 @synthesize timer = timer_;
 @synthesize playedQuestions = playedQuestions_;
 @synthesize persistanceURL = persistanceURL_;
+@synthesize questionBuffer = questionBuffer_;
 
 #pragma mark initialization and lazy getters
 - (OneRound *)oneRound
@@ -61,6 +66,14 @@ static NSString *const kPlayedKey = @"score";
         playedQuestions_ = [NSMutableArray array];
     }
     return playedQuestions_;
+}
+
+- (NSMutableArray *)questionBuffer
+{
+    if (!questionBuffer_){
+        questionBuffer_ = [NSMutableArray array];
+    }
+    return  questionBuffer_;
 }
 
 - (NSURL *)persistanceURL
@@ -116,6 +129,7 @@ static NSString *const kPlayedKey = @"score";
 {
     [self.playedQuestions addObject:[NSNumber numberWithInteger:
                                      self.oneRound.currentQuestion.IdByOrder]];
+    [self.questionBuffer removeObject:self.oneRound.currentQuestion];
     [self dismissKeyboard];
     [self stopTimer];
     self.oneRound.playerAnswer = self.answer.text;
@@ -156,43 +170,59 @@ static NSString *const kPlayedKey = @"score";
 #pragma mark working with database
 - (void)downloadSingleQuestion
 {
-    self.question.text = @"Загрузка вопроса...";
-    int ind = arc4random() % 17589;
-//    ind = 9507; //for test
-    NSLog(@"Downloading %d question...", ind);
-    NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder > %d)",ind];
-    PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
-    questQuery.limit = 1000;
-    [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if ( (!error) && ([objects count]>0) ){
-
-            DB *database = [DB standardBase];
-            if ([database countOfItemsInExercise] < 50000 ){
-            
-                NSMutableArray *someQuestions = [NSMutableArray array];
-                for (PFObject *object in objects){
-                    [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
-                }
-                
-                [database addItemsInExercise:[someQuestions copy]];
+    DB *database = [DB standardBase];
+    NSInteger questionCountInSqlDB = [database countOfItemsInExercise];
+    if ( questionCountInSqlDB < 50 ){
+        int ind = arc4random() % NumberOfQuestionInDatabase;
+        //    ind = 9507; //for test
+        NSLog(@"Downloading %d question...", ind);
+        NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder > %d)",ind];
+        PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
+        questQuery.limit = 65;
+        if ( questionCountInSqlDB == 0 ) {
+            NSArray *parseOutput = [questQuery findObjects];
+            NSMutableArray *someQuestions = [NSMutableArray array];
+            for (PFObject *object in parseOutput){
+                [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
             }
-
-            self.oneRound.currentQuestion = [[Question alloc] initWithParseObject:objects[0]];
-            NSString *text = [self.oneRound.currentQuestion.question
-                              stringByTrimmingCharactersInSet:
-                              [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-            text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
-            self.question.text = text;
-            
-            //[database addToFavorite: [database getID]];
+            [database addItemsInExercise:[someQuestions copy]];
+        }else{
+            [questQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if ( (!error) && ([objects count]>0) ){
+                        NSMutableArray *someQuestions = [NSMutableArray array];
+                        for (PFObject *object in objects){
+                            [someQuestions addObject:[[Question alloc] initWithParseObject:object]];
+                        }
+                        [database addItemsInExercise:[someQuestions copy]];
+                }
+                else{
+                    NSLog(@"Parse.com error: %@ %@", error, [error userInfo]);
+                    self.question.text = [NSString stringWithFormat:@"Вопрос %d не загружен :(", ind];
+                }
+            }];
         }
-        else{
-            NSLog(@"Parse.com error: %@ %@", error, [error userInfo]);
-            self.question.text = [NSString stringWithFormat:@"Вопрос %d не загружен :(", ind];
-        }
-    }];
+    }
 }
+
+- (void)questionsWatchDog
+{
+    self.question.text = @"Загрузка вопроса...";
+    if ( [self.questionBuffer count]==0 ){
+        [self downloadSingleQuestion];
+        self.questionBuffer = [[[DB standardBase] bunchOfQuestions] mutableCopy];
+        NSLog(@"Doing database request");
+    }
+    self.oneRound.currentQuestion = [self.questionBuffer lastObject];
+    
+    NSString *text = [self.oneRound.currentQuestion.question
+                      stringByTrimmingCharactersInSet:
+                      [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+    self.question.text = text;
+}
+
+
 
 #pragma mark timer work
 -(void)startTimer
@@ -266,7 +296,7 @@ static NSString *const kPlayedKey = @"score";
     [self.view addGestureRecognizer:tapBackground];
     [self observeKeyboard];
     if (!self.oneRound.currentQuestion) {
-        [self downloadSingleQuestion];
+        [self questionsWatchDog];
         [self startTimer];
         [self saveScore];
     }

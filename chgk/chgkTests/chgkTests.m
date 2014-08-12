@@ -35,7 +35,7 @@
 - (void)testBunchOfQuestions
 {
     NSLog(@"In Exercise are %ld rows", [[DB standardBase] countOfItemsInExercise]);
-    NSArray *bunch = [[DB standardBase] getBunchOfQuestions];
+    NSArray *bunch = [[DB standardBase] bunchOfQuestions];
     if ([bunch count]==0) {
         XCTFail(@"No question selected from database");
     }
