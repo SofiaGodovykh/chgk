@@ -47,7 +47,7 @@
         [_database open];
         //don't forget to remove it
         [_database executeUpdate:@"delete from Exercise"];
-        [_database executeUpdate:@"create table if not exists Exercise(idByOrder int, question text, answer text, annotation text, authors text, sources text, picture text, id int, isUsed int, isFavorited int)"];
+        [_database executeUpdate:@"create table if not exists Exercise(idByOrder int primary key, question text, answer text, annotation text, authors text, sources text, picture text, id int, isUsed int, isFavorited int)"];
     }
     
     return self;
@@ -122,6 +122,25 @@
     [self.database executeUpdate: update];
 }
 
+-(NSArray*)getAllFavs
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise where isFavorited=1"];
+    while([result next])
+    {
+        [array addObject:[result resultDictionary]];
+    }
+    
+    return array;
+}
+
+-(void)removeFromFavorite:(NSInteger) idByOrder
+{
+    NSMutableString *update = [[NSMutableString alloc] initWithString: @"UPDATE Exercise SET isFavorited=0 where idByOrder="];
+    [update appendFormat:@"%ld", (long)idByOrder];
+    [self.database executeUpdate: update];
+}
+
 -(NSInteger)getID
 {
     FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise group by random() limit 1"];
@@ -131,7 +150,7 @@
         return str;
     }
     
-    return nil;
+    return 0;
 }
 
 - (void)dealloc
