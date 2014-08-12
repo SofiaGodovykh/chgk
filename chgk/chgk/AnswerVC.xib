@@ -9,6 +9,7 @@
                 <outlet property="addToFavoriteButton" destination="eaf-0K-b8N" id="1V8-oP-m3P"/>
                 <outlet property="annotationView" destination="xxI-dU-0X6" id="FhE-I0-dfQ"/>
                 <outlet property="correctAnswer" destination="b2E-mK-beI" id="JfY-FC-H2m"/>
+                <outlet property="correctnessImage" destination="e7B-9a-Yps" id="A5T-J0-xmb"/>
                 <outlet property="endGame" destination="uhh-56-UZC" id="iq7-38-8fT"/>
                 <outlet property="makeCorrectButton" destination="96g-cQ-cFJ" id="hrb-mY-Np9"/>
                 <outlet property="nextQuestion" destination="6vN-4u-nyz" id="s3n-FJ-AYk"/>
@@ -65,10 +66,19 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e7B-9a-Yps">
+                            <rect key="frame" x="100" y="2" width="24" height="24"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="EQ5-vB-mwh"/>
+                                <constraint firstAttribute="width" constant="24" id="HPl-EM-uwr"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="1rz-70-hWk" firstAttribute="leading" secondItem="d7M-d0-EaQ" secondAttribute="leading" constant="7" id="2MD-7K-SbC"/>
+                        <constraint firstItem="e7B-9a-Yps" firstAttribute="leading" secondItem="1rz-70-hWk" secondAttribute="trailing" constant="10" id="4Q6-9Q-Mml"/>
                         <constraint firstItem="b2E-mK-beI" firstAttribute="top" secondItem="uaT-Hw-hfA" secondAttribute="bottom" constant="5" id="9we-fg-W84"/>
                         <constraint firstItem="wwn-4w-TvX" firstAttribute="width" secondItem="b2E-mK-beI" secondAttribute="width" id="B04-3n-w5c"/>
                         <constraint firstAttribute="trailing" secondItem="b2E-mK-beI" secondAttribute="trailing" constant="10" id="HhV-f6-QAw"/>
@@ -77,6 +87,7 @@
                         <constraint firstItem="b2E-mK-beI" firstAttribute="leading" secondItem="d7M-d0-EaQ" secondAttribute="leading" constant="10" id="Qcc-4W-qSS"/>
                         <constraint firstItem="1rz-70-hWk" firstAttribute="top" secondItem="d7M-d0-EaQ" secondAttribute="top" constant="5" id="TA0-t3-s3Z"/>
                         <constraint firstItem="uaT-Hw-hfA" firstAttribute="leading" secondItem="d7M-d0-EaQ" secondAttribute="leading" constant="7" id="fFi-mO-ebl"/>
+                        <constraint firstItem="wwn-4w-TvX" firstAttribute="top" secondItem="e7B-9a-Yps" secondAttribute="bottom" constant="5" id="wpu-d8-f6R"/>
                         <constraint firstItem="uaT-Hw-hfA" firstAttribute="top" secondItem="wwn-4w-TvX" secondAttribute="bottom" constant="10" id="yGi-FX-BBx"/>
                         <constraint firstItem="wwn-4w-TvX" firstAttribute="top" secondItem="1rz-70-hWk" secondAttribute="bottom" constant="5" id="z9N-rO-FQd"/>
                     </constraints>
@@ -126,16 +137,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If6-sC-R4r">
                     <rect key="frame" x="10" y="299" width="50" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="0.91966246890000003" blue="0.2461449215" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="QeQ-Oa-12D"/>
                         <constraint firstAttribute="width" constant="50" id="zQb-BB-tPR"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaf-0K-b8N">
-                    <rect key="frame" x="33" y="22" width="153" height="30"/>
+                    <rect key="frame" x="247" y="309" width="44" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Добавить в закладки">
+                    <state key="normal" title="Добть">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

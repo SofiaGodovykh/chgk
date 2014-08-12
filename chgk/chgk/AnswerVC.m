@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *score;
 @property (nonatomic, weak) IBOutlet UITextView *annotationView;
 @property (nonatomic, weak) IBOutlet UIView *rightSignal;
+@property (nonatomic, weak) IBOutlet UIImageView *correctnessImage;
 
 @property (nonatomic, weak) OneRound *oneRound;
 @property (nonatomic) BOOL isRight;
@@ -101,6 +102,19 @@
 {
     [super viewDidLoad];
     self.isRight = [self checkAnswer];
+    
+    if(self.isRight)
+    {
+        UIImage *image = [UIImage imageNamed: @"OK.png"];
+        [self.correctnessImage setImage:image];
+    }
+    
+    else
+    {
+        UIImage *image = [UIImage imageNamed: @"Wrong.png"];
+        [self.correctnessImage setImage:image];
+    }
+    
     self.playerAnswer.text = self.oneRound.playerAnswer;
     
     if([self.playerAnswer.text  isEqual: @""])
@@ -111,7 +125,7 @@
     self.correctAnswer.text = self.oneRound.currentQuestion.answer;
     self.annotationView.text = self.oneRound.currentQuestion.annotation;
     
-    self.rightSignal.backgroundColor = self.isRight ? [UIColor greenColor] : [UIColor redColor];
+
     
     self.score.text = [NSString stringWithFormat:
                        @"%d : %d",
