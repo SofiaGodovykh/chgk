@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinalVC">
             <connections>
                 <outlet property="scoreLabel" destination="MfG-Fc-Qhq" id="CKM-he-MM7"/>
+                <outlet property="shareToFacebook" destination="b4T-Zk-2r4" id="45q-4O-y9d"/>
+                <outlet property="shareToTwitter" destination="oaQ-PW-w9F" id="wwu-bL-kpt"/>
                 <outlet property="startGameButton" destination="4gk-U5-4ir" id="sGk-oh-48u"/>
                 <outlet property="statistic" destination="j1G-nW-mvx" id="s7N-F0-0uu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -55,13 +57,45 @@
                         <action selector="statisticPressed:" destination="-1" eventType="touchUpInside" id="uwh-63-0Hd"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4T-Zk-2r4">
+                    <rect key="frame" x="54" y="413" width="604" height="512"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="kQC-6d-tg3"/>
+                        <constraint firstAttribute="height" constant="48" id="lQQ-w6-eKg"/>
+                    </constraints>
+                    <state key="normal" title="фейсбучек" image="fb.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="shareToFacebookPressed:" destination="-1" eventType="touchUpInside" id="Rez-dX-Qyz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaQ-PW-w9F">
+                    <rect key="frame" x="205" y="409" width="1225" height="926"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="NVq-kR-9Rj"/>
+                        <constraint firstAttribute="height" constant="48" id="iG9-Av-GUZ"/>
+                    </constraints>
+                    <state key="normal" title="твиттерок" image="Twitter.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="shareToTwitterPressed:" destination="-1" eventType="touchUpInside" id="lWD-qW-mO0"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="4gk-U5-4ir" firstAttribute="top" secondItem="MfG-Fc-Qhq" secondAttribute="bottom" constant="50" id="8AP-GW-8ly"/>
                 <constraint firstItem="MfG-Fc-Qhq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="145" id="GkF-vI-Td7"/>
                 <constraint firstItem="j1G-nW-mvx" firstAttribute="top" secondItem="4gk-U5-4ir" secondAttribute="bottom" constant="50" id="Nk1-Fz-4Wu"/>
+                <constraint firstAttribute="trailing" secondItem="oaQ-PW-w9F" secondAttribute="trailing" constant="70" id="NwO-7d-gqe"/>
                 <constraint firstAttribute="centerX" secondItem="j1G-nW-mvx" secondAttribute="centerX" id="VRh-Md-PEP"/>
+                <constraint firstItem="oaQ-PW-w9F" firstAttribute="top" secondItem="j1G-nW-mvx" secondAttribute="bottom" constant="50" id="kTf-jB-Z7N"/>
+                <constraint firstItem="b4T-Zk-2r4" firstAttribute="top" secondItem="j1G-nW-mvx" secondAttribute="bottom" constant="50" id="qPL-pc-pGh"/>
+                <constraint firstItem="b4T-Zk-2r4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="54" id="unp-5i-zhb"/>
                 <constraint firstAttribute="centerX" secondItem="4gk-U5-4ir" secondAttribute="centerX" id="v8D-do-ZXL"/>
                 <constraint firstAttribute="centerX" secondItem="MfG-Fc-Qhq" secondAttribute="centerX" id="z0W-Ge-x3c"/>
             </constraints>
@@ -69,4 +103,8 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="Twitter.png" width="1139" height="926"/>
+        <image name="fb.png" width="512" height="512"/>
+    </resources>
 </document>

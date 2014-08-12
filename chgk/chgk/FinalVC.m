@@ -11,12 +11,16 @@
 #import "FavoriteVC.h"
 #import "DB.h"
 #import "QuestionVC.h"
+#import <Social/Social.h>
+
 
 @interface FinalVC ()
 
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 @property (nonatomic, weak) IBOutlet UIButton *startGameButton;
 @property (nonatomic, weak) IBOutlet UIButton *statistic;
+@property (nonatomic, weak) IBOutlet UIButton *shareToFacebook;
+@property (nonatomic, weak) IBOutlet UIButton *shareToTwitter;
 
 @property (nonatomic) int rightAnswers;
 @property (nonatomic) int wrongAnswers;
@@ -58,5 +62,20 @@
     DB *database = [DB standardBase];
     [playedQuestions addObject:[database getQuestionsById:12]];
 //    FavoriteVC *statisticVC = [FavoriteVC alloc]initWithQuestions:[DB standardBase]
+}
+
+- (IBAction)shareToFacebookPressed:(id)sender
+{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [controller setInitialText:@"score"];
+    [self presentViewController:controller animated:YES completion:Nil];
+}
+
+- (IBAction)shareToTwitterPressed:(id)sender
+{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [controller setInitialText:@"score"];
+    [self presentViewController:controller animated:YES completion:Nil];
+
 }
 @end

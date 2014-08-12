@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10793868199A7B9B00E0E043 /* Twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 10793867199A7B9B00E0E043 /* Twitter.png */; };
+		1079386B199A7BA800E0E043 /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 10793869199A7BA800E0E043 /* fb.png */; };
+		1079386C199A7BA800E0E043 /* fb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1079386A199A7BA800E0E043 /* fb@2x.png */; };
 		80C8B8411990F7A30080290F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8401990F7A30080290F /* Parse.framework */; };
 		80C8B8431990F7C70080290F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8421990F7C70080290F /* AudioToolbox.framework */; };
 		80C8B8451990F7CD0080290F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C8B8441990F7CD0080290F /* CFNetwork.framework */; };
@@ -69,6 +72,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10793867199A7B9B00E0E043 /* Twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Twitter.png; sourceTree = "<group>"; };
+		10793869199A7BA800E0E043 /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
+		1079386A199A7BA800E0E043 /* fb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb@2x.png"; sourceTree = "<group>"; };
 		80C8B8401990F7A30080290F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		80C8B8421990F7C70080290F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		80C8B8441990F7CD0080290F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -266,6 +272,9 @@
 				842E5BF0199A02540062E582 /* FinalVC.h */,
 				842E5BF1199A02540062E582 /* FinalVC.m */,
 				842E5BF2199A02540062E582 /* FinalVC.xib */,
+				10793869199A7BA800E0E043 /* fb.png */,
+				1079386A199A7BA800E0E043 /* fb@2x.png */,
+				10793867199A7B9B00E0E043 /* Twitter.png */,
 				80C8B85C1991F8290080290F /* ContinueDelegate.h */,
 				842E5BC11998AAD70062E582 /* DB.h */,
 				842E5BC21998AAD70062E582 /* DB.m */,
@@ -390,14 +399,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				80C8B89E1999C81B0080290F /* FavoriteVC.xib in Resources */,
+				1079386B199A7BA800E0E043 /* fb.png in Resources */,
 				849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */,
 				849F745E1990D7760051CF7E /* timerIcon@2x.png in Resources */,
+				10793868199A7B9B00E0E043 /* Twitter.png in Resources */,
 				84DE1097198603860058C5B4 /* InfoPlist.strings in Resources */,
 				80C8B85B1991019A0080290F /* MenuVC.xib in Resources */,
 				80C8B8A5199A0C530080290F /* Wrong.png in Resources */,
 				80C8B8A3199A0C530080290F /* OK.png in Resources */,
 				80C8B8AC199A2DFB0080290F /* FullQuestionInfoVC.xib in Resources */,
 				849F745D1990D7760051CF7E /* timerIcon.png in Resources */,
+				1079386C199A7BA800E0E043 /* fb@2x.png in Resources */,
 				842E5BF4199A02550062E582 /* FinalVC.xib in Resources */,
 				80C8B861199212310080290F /* AnswerVC.xib in Resources */,
 				84DE109F198603860058C5B4 /* Images.xcassets in Resources */,
