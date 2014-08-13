@@ -49,7 +49,6 @@
 
 - (IBAction)favoritePressed:(id)sender
 {
-    //[self.delegate stopTimer];
     FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:[[DB standardBase] getAllFavs]
                                                         deletable:YES];
     favoriteVC.delegate = self;

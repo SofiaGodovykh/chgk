@@ -12,6 +12,7 @@
 @interface FullQuestionInfoVC ()
 
 @property (nonatomic, weak) IBOutlet UITextView *textView;
+@property (nonatomic, weak) IBOutlet UILabel *label1;
 @property (nonatomic, strong) Question *question;
 
 @end
@@ -41,7 +42,11 @@
     }
     // CR: Don't use the description property for anything besides debugging.
     self.textView.text = [self.question fullInfo];
-    
+//    
+//    self.label1.text = [self.question fullInfo];
+//    CGRect newFrame = self.label1.frame;
+//    CGSize labelSize = [self.label1 sizeThatFits:CGSizeMake(newFrame.size.width, CGFLOAT_MAX)];
+//    [self.label1 sizeToFit];
 }
 
 - (void)didTouchOKBarButtonItem:(UIBarButtonItem *)sender

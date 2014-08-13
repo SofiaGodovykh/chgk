@@ -71,6 +71,12 @@
     [self presentViewController:navigationController animated:YES completion:NULL];
 }
 
+- (IBAction)menuPressed:(id)sender
+{
+    MenuVC *menuVC = [[MenuVC alloc]init];
+    [self.navigationController setViewControllers:[NSArray arrayWithObject:menuVC] animated:YES];
+}
+
 - (void)favoriteVCdidFinish:(FavoriteVC *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];

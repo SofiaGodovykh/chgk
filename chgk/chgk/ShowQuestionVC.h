@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class showQuestionVC;
+@class ShowQuestionVC;
 
 @protocol ShowQuestionVCDelegate <NSObject>
 
-- (void)showQuestionVCDidFinished:(showQuestionVC *)sender;
+- (void)showQuestionVCDidFinished:(ShowQuestionVC *)sender;
 
 @end
 
-@interface showQuestionVC : UIViewController
+@interface ShowQuestionVC : UIViewController
 
 @property (nonatomic, strong) id<ShowQuestionVCDelegate> delegate;
 - (instancetype)initWithQuestionText:(NSString *)text;

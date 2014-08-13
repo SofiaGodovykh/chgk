@@ -191,8 +191,8 @@ static NSString *const kPlayedKey = @"score";
 
 
 - (void)checkRightness:(BOOL)isRight{
-    [self saveScore];
     isRight == 1? self.oneRound.rightAnswers++ : self.oneRound.wrongAnswers ++;
+    [self saveScore];
 }
 
 #pragma mark working with database
