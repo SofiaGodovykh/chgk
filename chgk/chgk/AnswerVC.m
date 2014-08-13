@@ -111,8 +111,6 @@
     [self.delegate endGameWithLastAnswer:self.isRight];
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

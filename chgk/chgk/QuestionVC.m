@@ -26,7 +26,7 @@ static NSString *const kWinsKey = @"wins";
 static NSString *const kLoosesKey = @"looses";
 static NSString *const kPlayedKey = @"score";
 
-@interface QuestionVC () <ContinueDelegate,FinalVCViewControllerDelegate>
+@interface QuestionVC () <ContinueDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *score;
 @property (nonatomic, weak) IBOutlet UILabel *timerLabel;
@@ -131,19 +131,20 @@ static NSString *const kPlayedKey = @"score";
 #pragma mark dealing with modal windows
 - (IBAction)confirmPressed:(id)sender
 {
-    [self.playedQuestions addObject:[NSNumber numberWithInteger:
-                                     self.oneRound.currentQuestion.IdByOrder]];
-    [self.questionBuffer removeObject:self.oneRound.currentQuestion];
-    [self dismissKeyboard];
-    [self stopTimer];
-    self.oneRound.playerAnswer = self.answer.text;
 //TODO: send copy of oneRound
     AnswerVC *modalAnswer = [[AnswerVC alloc]initWithRound:self.oneRound];
     modalAnswer.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     modalAnswer.delegate = self;
     [self presentViewController:modalAnswer
                        animated:YES
-                     completion:nil];
+                     completion:^{
+                         [self.playedQuestions addObject:[NSNumber numberWithInteger:
+                                                          self.oneRound.currentQuestion.IdByOrder]];
+                         [self.questionBuffer removeObject:self.oneRound.currentQuestion];
+                         [self dismissKeyboard];
+                         [self stopTimer];
+                         self.oneRound.playerAnswer = self.answer.text;
+                     }];
 }
 
 - (void)menuButtonTapped{
@@ -182,19 +183,12 @@ static NSString *const kPlayedKey = @"score";
         FinalVC *finalVC = [[FinalVC alloc]initWithRight:self.oneRound.rightAnswers
                                             wrongAnswers:self.oneRound.wrongAnswers
                                                 playedID:[self.playedQuestions copy]];
-        finalVC.delegate = self;
+        [self stopTimer];
         [self startNewGame];
-        [self presentViewController:finalVC
-                           animated:YES
-                         completion:nil];
+        [self.navigationController setViewControllers:[NSArray arrayWithObject:finalVC] animated:YES];
     }];
 }
 
-- (void)finalVCdidFinish:(FinalVC *)sender withView:(UIViewController *)viewController
-{
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [self stopTimer];
-    [self.navigationController setViewControllers:[NSArray arrayWithObject:viewController] animated:YES];}
 
 - (void)checkRightness:(BOOL)isRight{
     [self saveScore];
@@ -334,8 +328,6 @@ static NSString *const kPlayedKey = @"score";
     if (!self.oneRound.currentQuestion) {
         [self questionsWatchDog];
         [self startTimer];
-       // [self saveScore];
-        //[self loadScore];
     }
 }
 

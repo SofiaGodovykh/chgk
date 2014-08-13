@@ -56,12 +56,11 @@
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     [questionVC startNewGame];
-    [self.delegate finalVCdidFinish:self withView:questionVC];
+    [self.navigationController setViewControllers:[NSArray arrayWithObject:questionVC] animated:YES];
 }
 
 - (IBAction)statisticPressed:(id)sender
 {
-    //[self.delegate stopTimer];
     FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:
                               [[DB standardBase] questionsWithNumbers:self.playedID]
                                                         deletable:NO];
