@@ -11,8 +11,9 @@
 #import "Question.h"
 #import "FinalVC.h"
 #import "DB.h"
+#import "showQuestionVC.h"
 
-@interface AnswerVC ()
+@interface AnswerVC () <ShowQuestionVCDelegate>
 
 @property (nonatomic, weak) IBOutlet UIButton *makeCorrectButton;
 @property (nonatomic, weak) IBOutlet UIButton *nextQuestion;
@@ -112,6 +113,46 @@
 - (IBAction)endGamePressed:(id)sender
 {
     [self.delegate endGameWithLastAnswer:self.isRight];
+}
+
+- (IBAction)showQuestionPressed:(id)sender
+{
+//    UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc]
+//                                             initWithTarget:self
+//                                             action:@selector(dismissKeyboard)];
+//    
+//    UIView *modalView =
+//    [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    modalView.opaque = NO;
+//    modalView.backgroundColor =
+//    [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+//    
+//    UILabel *label = [[UILabel alloc] init];
+//    label.text = @"Modal View";
+//    label.textColor = [UIColor whiteColor];
+//    label.backgroundColor = [UIColor whiteColor];
+//    label.opaque = NO;
+//    [label sizeToFit];
+//    [label setCenter:CGPointMake(modalView.frame.size.width / 2,
+//                                 modalView.frame.size.height / 4)];
+//    [modalView addSubview:label];
+//    
+//    UITextView *questionText = [[UITextView alloc]init];
+//    questionText.text = self.oneRound.currentQuestion.question;
+//    questionText.backgroundColor = [UIColor whiteColor];
+//    questionText.opaque = NO;
+//    questionText.editable = NO;
+//    CGRect newFrame = CGRectMake(20, 20, (modalView.frame.size.width-40), (modalView.frame.size.height-40));
+//    questionText.frame = newFrame;
+////    [questionText setCenter:CGPointMake(modalView.frame.size.width / 2,
+////                                 modalView.frame.size.height / 2)];
+//    [modalView addSubview:questionText];
+//    
+////    [self.view addSubview:modalView];
+
+    showQuestionVC *fullQuestionInfo = [[showQuestionVC alloc]initWithQuestionText:self.oneRound.currentQuestion.question];
+    fullQuestionInfo.delegate = self;
+    [self presentViewController:fullQuestionInfo animated:YES completion:nil];
 }
 
 - (void)viewDidLoad
