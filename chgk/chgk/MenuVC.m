@@ -25,7 +25,7 @@
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     [self.navigationController pushViewController:questionVC animated:YES];
-    
+    [questionVC startNewGame];
     if ((!self.navigationController)&&(!!self.delegate)){
         [self.delegate stopTimer];
         UINavigationController *mainNC = [[UINavigationController alloc]
@@ -50,7 +50,8 @@
 - (IBAction)favoritePressed:(id)sender
 {
     //[self.delegate stopTimer];
-    FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:[[DB standardBase] getAllFavs]];
+    FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:[[DB standardBase] getAllFavs]
+                                                        deletable:YES];
     favoriteVC.delegate = self;
     UINavigationController *const navigationController =
     [[UINavigationController alloc] initWithRootViewController:favoriteVC];

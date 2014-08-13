@@ -14,7 +14,7 @@
 #import <Social/Social.h>
 
 
-@interface FinalVC ()
+@interface FinalVC () <FavoriteVCDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 @property (nonatomic, weak) IBOutlet UIButton *startGameButton;
@@ -24,19 +24,21 @@
 
 @property (nonatomic) int rightAnswers;
 @property (nonatomic) int wrongAnswers;
+@property (nonatomic) NSArray *playedID;
 
 @end
 
 @implementation FinalVC
 @synthesize rightAnswers = rightAnswers_;
 @synthesize wrongAnswers = wrongAnswers_;
-
+@synthesize playedID = playedID_;
 
 - (instancetype)initWithRight:(int)right wrongAnswers:(int)wrong playedID:(NSArray *)played
 {
     if (self = [super init]){
         rightAnswers_ = right;
         wrongAnswers_ = wrong;
+        playedID_ = played;
     }
     return self;
 }
@@ -53,15 +55,26 @@
 - (IBAction)startGamePressed:(id)sender
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
+    [questionVC startNewGame];
     [self.delegate finalVCdidFinish:self withView:questionVC];
 }
 
 - (IBAction)statisticPressed:(id)sender
 {
-    NSMutableArray *playedQuestions = [NSMutableArray array];
-    DB *database = [DB standardBase];
-    [playedQuestions addObject:[database getQuestionsById:12]];
-//    FavoriteVC *statisticVC = [FavoriteVC alloc]initWithQuestions:[DB standardBase]
+    //[self.delegate stopTimer];
+    FavoriteVC *favoriteVC = [[FavoriteVC alloc]initWithQuestions:
+                              [[DB standardBase] questionsWithNumbers:self.playedID]
+                                                        deletable:NO];
+    favoriteVC.delegate = self;
+    UINavigationController *const navigationController =
+    [[UINavigationController alloc] initWithRootViewController:favoriteVC];
+    
+    [self presentViewController:navigationController animated:YES completion:NULL];
+}
+
+- (void)favoriteVCdidFinish:(FavoriteVC *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)shareToFacebookPressed:(id)sender

@@ -10,19 +10,19 @@
 #import "Question.h"
 
 @interface DB : NSObject
-
-- (void)addItemsInExercise:(NSArray* )items;
-- (NSInteger)countOfItemsInExercise;
-
 /**
  *  Returns the shared database object.
  */
 + (instancetype)standardBase;
 
--(NSArray*)bunchOfQuestions;
+- (void)addItemsInExercise:(NSArray* )items;
+- (NSInteger)countOfItemsInExercise;
 
--(void)addToFavorite:(NSInteger) idByOrder;
--(NSArray*)getAllFavs;
--(NSInteger)getID;
--(Question*)getQuestionsById:(NSInteger) key;
+- (NSArray *)bunchOfQuestions;
+- (NSArray *)questionsWithNumbers:(NSArray *)idByOrder;
+- (Question *)getQuestionsById:(NSInteger)key;
+- (void)addToFavorite:(NSInteger)idByOrder;
+- (void)removeFromFavorite:(NSInteger)idByOrder;
+- (NSArray *)getAllFavs;
+- (NSInteger)getID;
 @end

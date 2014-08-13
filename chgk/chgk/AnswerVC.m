@@ -12,7 +12,7 @@
 #import "FinalVC.h"
 #import "DB.h"
 
-@interface AnswerVC () <FinalVCViewControllerDelegate>
+@interface AnswerVC ()
 
 @property (nonatomic, weak) IBOutlet UIButton *makeCorrectButton;
 @property (nonatomic, weak) IBOutlet UIButton *nextQuestion;
@@ -91,7 +91,6 @@
 
 - (IBAction)makeCorrectPressed:(id)sender
 {
-//    [self.delegate nextQuestionAfterAnswer:YES];
     self.isRight = !self.isRight;
     self.makeCorrectButton.selected = !self.makeCorrectButton.selected;
 }
@@ -103,24 +102,10 @@
 
 - (IBAction)endGamePressed:(id)sender
 {
-    int right = self.oneRound.rightAnswers;
-    int wrong = self.oneRound.wrongAnswers;
-    self.isRight ? right++ : wrong ++;
-    //TODO : do it
-    //FinalVC *finalVC = [[FinalVC alloc]initWithRight:right wrongAnswers:wrong playedID:<#(NSArray *)#>];
-    FinalVC *finalVC = [[FinalVC alloc]init];
-    finalVC.delegate = self;
-    
-    [self presentViewController:finalVC
-                       animated:YES
-                     completion:nil];
+    [self.delegate endGameWithLastAnswer:self.isRight];
 }
 
-- (void)finalVCdidFinish:(FinalVC *)sender withView:(UIViewController *)viewController
-{
-//    [self dismissViewControllerAnimated:NO completion:nil];
-    [self.delegate answerVC:self didFinishedWithView:viewController];
-}
+
 
 - (void)viewDidLoad
 {

@@ -16,6 +16,6 @@
 - (void)nextQuestionAfterAnswer:(BOOL)isRight;
 - (void)questionsWatchDog;
 - (void)stopTimer;
-- (void)answerVC:(AnswerVC *)sender didFinishedWithView:(UIViewController *)viewController;
+- (void)endGameWithLastAnswer:(BOOL)isRight;
 
 @end

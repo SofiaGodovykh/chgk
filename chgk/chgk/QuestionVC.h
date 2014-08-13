@@ -11,5 +11,6 @@
 @interface QuestionVC : UIViewController
 
 - (void)continuePreviousGame;
+- (void)startNewGame;
 
 @end

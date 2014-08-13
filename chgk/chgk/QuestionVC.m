@@ -8,6 +8,7 @@
 
 #import "QuestionVC.h"
 #import "AnswerVC.h"
+#import "FinalVC.h"
 #import "OneRound.h"
 #import "Question.h"
 #import "MenuVC.h"
@@ -15,7 +16,7 @@
 #import "DB.h"
 #import <Parse/Parse.h>
 
-static const NSUInteger TimerMaximumSeconds = 5;
+static const NSUInteger TimerMaximumSeconds = 60;
 static const NSUInteger NumberOfQuestionInDatabase = 17589;
 static const NSUInteger NumberOfQuestionForDownload = 100;
 static const NSUInteger MinimumNumberOfQuestionInDatabase = 200;
@@ -25,7 +26,7 @@ static NSString *const kWinsKey = @"wins";
 static NSString *const kLoosesKey = @"looses";
 static NSString *const kPlayedKey = @"score";
 
-@interface QuestionVC () <ContinueDelegate>
+@interface QuestionVC () <ContinueDelegate,FinalVCViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *score;
 @property (nonatomic, weak) IBOutlet UILabel *timerLabel;
@@ -38,9 +39,9 @@ static NSString *const kPlayedKey = @"score";
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, strong) OneRound *oneRound;
-@property (nonatomic, strong) NSMutableArray *playedQuestions;
 @property (nonatomic, strong) NSURL *persistanceURL;
 
+@property (nonatomic, strong) NSMutableArray *playedQuestions;
 @property (nonatomic, strong) NSMutableArray *questionBuffer;
 
 @end
@@ -164,22 +165,40 @@ static NSString *const kPlayedKey = @"score";
     }];
 }
 
-- (void)answerVC:(AnswerVC *)sender didFinishedWithView:(UIViewController *)viewController
-{
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [self stopTimer];
-    [self.navigationController setViewControllers:[NSArray arrayWithObject:viewController] animated:YES];
-}
-
 - (void)nextQuestionAfterAnswer:(BOOL)isRight
 {
     self.timerLabel.text = @"01:00";
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    [self checkRightness:isRight];
     self.answer.text = @"";
-    isRight == 1? self.oneRound.rightAnswers++ : self.oneRound.wrongAnswers ++;
     [self startTimer];
     [self refreshScoreLabel];
+}
+
+- (void)endGameWithLastAnswer:(BOOL)isRight
+{
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self checkRightness:isRight];
+        FinalVC *finalVC = [[FinalVC alloc]initWithRight:self.oneRound.rightAnswers
+                                            wrongAnswers:self.oneRound.wrongAnswers
+                                                playedID:[self.playedQuestions copy]];
+        finalVC.delegate = self;
+        [self startNewGame];
+        [self presentViewController:finalVC
+                           animated:YES
+                         completion:nil];
+    }];
+}
+
+- (void)finalVCdidFinish:(FinalVC *)sender withView:(UIViewController *)viewController
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self stopTimer];
+    [self.navigationController setViewControllers:[NSArray arrayWithObject:viewController] animated:YES];}
+
+- (void)checkRightness:(BOOL)isRight{
     [self saveScore];
+    isRight == 1? self.oneRound.rightAnswers++ : self.oneRound.wrongAnswers ++;
 }
 
 #pragma mark working with database
@@ -238,8 +257,6 @@ static NSString *const kPlayedKey = @"score";
     text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
     self.question.text = text;
 }
-
-
 
 #pragma mark timer work
 -(void)startTimer
@@ -317,26 +334,38 @@ static NSString *const kPlayedKey = @"score";
     if (!self.oneRound.currentQuestion) {
         [self questionsWatchDog];
         [self startTimer];
-        [self saveScore];
+       // [self saveScore];
+        //[self loadScore];
     }
 }
 
 #pragma mark persistance functions
-- (void)continuePreviousGame
+- (void)loadScore
 {
     NSDictionary *oldData = [NSDictionary dictionaryWithContentsOfURL:self.persistanceURL];
     if (!!oldData){
         self.oneRound.wrongAnswers = [[oldData objectForKey:kLoosesKey] intValue];
         self.oneRound.rightAnswers = [[oldData objectForKey:kWinsKey] intValue];
-        self.playedQuestions = [oldData objectForKey:self.playedQuestions];
+        self.playedQuestions = [[oldData objectForKey:kPlayedKey] mutableCopy];
     }
 }
+- (void)continuePreviousGame
+{
+    [self loadScore];
+}
 
+- (void)startNewGame
+{
+    self.playedQuestions = [NSMutableArray array];
+    self.oneRound.wrongAnswers = 0;
+    self.oneRound.rightAnswers = 0;
+    [self saveScore];
+}
 - (void)saveScore
 {
     NSDictionary *saveData = @{kWinsKey   : [NSNumber numberWithInteger:self.oneRound.rightAnswers],
                                kLoosesKey : [NSNumber numberWithInteger:self.oneRound.wrongAnswers],
-                               kPlayedKey : self.playedQuestions};
+                               kPlayedKey : [self.playedQuestions copy]};
     [saveData writeToURL:self.persistanceURL atomically:YES];
 }
 
