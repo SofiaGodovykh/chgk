@@ -24,5 +24,6 @@
 - (instancetype)initWithParseObject:(PFObject *)object;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (id)init NS_UNAVAILABLE;
+- (NSString *)fullInfo;
 
 @end

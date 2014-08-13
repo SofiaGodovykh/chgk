@@ -46,7 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.scoreLabel.text = [NSString stringWithFormat:@"%02d:%02d",
+    self.scoreLabel.text = [NSString stringWithFormat:@"%d:%d",
                             self.rightAnswers,
                             self.wrongAnswers];
     // Do any additional setup after loading the view from its nib.

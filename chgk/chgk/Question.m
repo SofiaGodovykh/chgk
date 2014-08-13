@@ -84,7 +84,7 @@
     return text;
 }
 
-- (NSString *)description
+- (NSString *)fullInfo
 {
     NSMutableString *text = [NSMutableString string];
     [text appendString:@"Вопрос:\n"];

@@ -28,12 +28,26 @@
 @property (nonatomic, weak) OneRound *oneRound;
 @property (nonatomic) BOOL isRight;
 
+@property (nonatomic,strong) NSRegularExpression *trimmingRegex;
+
 @end
 
 @implementation AnswerVC
 
 @synthesize oneRound = oneRound_;
 @synthesize isRight = isRight_;
+@synthesize trimmingRegex = trimmingRegex_;
+
+- (NSRegularExpression *)trimmingRegex
+{
+    if (!trimmingRegex_){
+        trimmingRegex_ = [NSRegularExpression
+                          regularExpressionWithPattern:@"[^0-9a-zа-я]"
+                          options:NSRegularExpressionCaseInsensitive
+                          error:nil];
+    }
+    return trimmingRegex_;
+}
 
 //TODO: bad practice to permit init of VC;
 - (id)init
@@ -67,20 +81,11 @@
 - (NSString *)trimString:(NSString *)string
 {
     NSMutableString *modified = [[string lowercaseString] mutableCopy];
-    NSError *__autoreleasing error = nil;
-    // CR: Creating regex takes some time, better store this object for future use.
-    NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:@"[^0-9a-zа-я]"
-                                  options:NSRegularExpressionCaseInsensitive
-                                  error:&error];
-    if(!!error){
-        NSLog(@"Error in string trimming, %@", error.userInfo);
-    }
     if (!!modified){
-    [regex replaceMatchesInString:modified
-                          options:kNilOptions
-                            range:NSMakeRange(0, [modified length])
-                     withTemplate:@""];
+    [self.trimmingRegex replaceMatchesInString:modified
+                                       options:kNilOptions
+                                         range:NSMakeRange(0, [modified length])
+                                  withTemplate:@""];
     }
     return [modified copy];
 }
