@@ -39,7 +39,7 @@
                                        action:@selector(didTouchOKBarButtonItem:)];;
         [self.navigationItem setRightBarButtonItem:okBarButtonItem];
     }
-    
+    // CR: Don't use the description property for anything besides debugging.
     self.textView.text = [self.question description];
     
 }
