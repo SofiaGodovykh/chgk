@@ -43,6 +43,8 @@
 		842E5BDF1998ADA00062E582 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842E5BDE1998ADA00062E582 /* libsqlite3.0.dylib */; };
 		842E5BF3199A02550062E582 /* FinalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 842E5BF1199A02540062E582 /* FinalVC.m */; };
 		842E5BF4199A02550062E582 /* FinalVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842E5BF2199A02540062E582 /* FinalVC.xib */; };
+		84980408199B671000AE3E6F /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 84980406199B671000AE3E6F /* favorite.png */; };
+		84980409199B671000AE3E6F /* favorite_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 84980407199B671000AE3E6F /* favorite_on.png */; };
 		849F74591990C5A40051CF7E /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F74571990C5A40051CF7E /* QuestionVC.m */; };
 		849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849F74581990C5A40051CF7E /* QuestionVC.xib */; };
 		849F745D1990D7760051CF7E /* timerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F745B1990D7760051CF7E /* timerIcon.png */; };
@@ -123,6 +125,8 @@
 		842E5BF0199A02540062E582 /* FinalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalVC.h; sourceTree = "<group>"; };
 		842E5BF1199A02540062E582 /* FinalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalVC.m; sourceTree = "<group>"; };
 		842E5BF2199A02540062E582 /* FinalVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalVC.xib; sourceTree = "<group>"; };
+		84980406199B671000AE3E6F /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
+		84980407199B671000AE3E6F /* favorite_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_on.png; sourceTree = "<group>"; };
 		849F74561990C5A40051CF7E /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		849F74571990C5A40051CF7E /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		849F74581990C5A40051CF7E /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 				842E5BF0199A02540062E582 /* FinalVC.h */,
 				842E5BF1199A02540062E582 /* FinalVC.m */,
 				842E5BF2199A02540062E582 /* FinalVC.xib */,
+				84980406199B671000AE3E6F /* favorite.png */,
+				84980407199B671000AE3E6F /* favorite_on.png */,
 				80C8B85C1991F8290080290F /* ContinueDelegate.h */,
 				842E5BC11998AAD70062E582 /* DB.h */,
 				842E5BC21998AAD70062E582 /* DB.m */,
@@ -405,11 +411,13 @@
 				10793868199A7B9B00E0E043 /* Twitter.png in Resources */,
 				84DE1097198603860058C5B4 /* InfoPlist.strings in Resources */,
 				80C8B85B1991019A0080290F /* MenuVC.xib in Resources */,
+				84980408199B671000AE3E6F /* favorite.png in Resources */,
 				80C8B8A5199A0C530080290F /* Wrong.png in Resources */,
 				80C8B8A3199A0C530080290F /* OK.png in Resources */,
 				80C8B8AC199A2DFB0080290F /* FullQuestionInfoVC.xib in Resources */,
 				849F745D1990D7760051CF7E /* timerIcon.png in Resources */,
 				1079386C199A7BA800E0E043 /* fb@2x.png in Resources */,
+				84980409199B671000AE3E6F /* favorite_on.png in Resources */,
 				842E5BF4199A02550062E582 /* FinalVC.xib in Resources */,
 				80C8B861199212310080290F /* AnswerVC.xib in Resources */,
 				84DE109F198603860058C5B4 /* Images.xcassets in Resources */,

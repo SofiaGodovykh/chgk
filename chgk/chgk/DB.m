@@ -36,7 +36,7 @@
 - (DB *)init
 {
     if(self == [super init]){
-        NSString *path = @"/Users/signatov/Documents/kk/database.sqlite";
+        NSString *path = @"/Users/admin/Documents/kk/database.sqlite";
         //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
                                                     //         NSUserDomainMask,
                                                      //        YES);

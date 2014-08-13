@@ -103,7 +103,10 @@
 
 - (IBAction)addToFavoritePressed:(id)sender
 {
+    UIImage *image = [UIImage imageNamed: @"favorite_on.png"];
+    [self.addToFavoriteButton.imageView setImage:image];
     [[DB standardBase] addToFavorite:self.oneRound.currentQuestion.IdByOrder];
+    self.addToFavoriteButton.selected = YES;
 }
 
 - (IBAction)endGamePressed:(id)sender
@@ -144,6 +147,11 @@
                        @"%d : %d",
                        self.oneRound.rightAnswers,
                        self.oneRound.wrongAnswers];
+    
+    UIImage *image = [UIImage imageNamed: @"favorite_on.png"];
+    [self.addToFavoriteButton setImage:image forState: UIControlStateSelected];
+
+    
     [self.delegate questionsWatchDog];
 }
 
