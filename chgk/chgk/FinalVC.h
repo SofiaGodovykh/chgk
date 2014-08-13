@@ -20,6 +20,7 @@
 
 @property (nonatomic, weak) id<FinalVCViewControllerDelegate> delegate;
 
+// CR: Why not to use one object for game info?
 - (instancetype)initWithRight:(int)right wrongAnswers:(int)wrong playedID:(NSArray *)played;
 
 @end

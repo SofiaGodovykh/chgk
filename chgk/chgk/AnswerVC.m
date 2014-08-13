@@ -68,6 +68,7 @@
 {
     NSMutableString *modified = [[string lowercaseString] mutableCopy];
     NSError *__autoreleasing error = nil;
+    // CR: Creating regex takes some time, better store this object for future use.
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"[^0-9a-zа-я]"
                                   options:NSRegularExpressionCaseInsensitive
