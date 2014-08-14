@@ -144,14 +144,15 @@ static NSString *const kPlayedKey = @"score";
     [self.playedQuestions addObject:[NSNumber numberWithInteger:
                                      self.oneRound.currentQuestion.IdByOrder]];
     [self.questionBuffer removeObject:self.oneRound.currentQuestion];
-    [self stopTimer];
-    AnswerVC *modalAnswer = [[AnswerVC alloc]initWithRound:self.oneRound];
+    AnswerVC *modalAnswer = [[AnswerVC alloc]initWithRound:[self.oneRound copy]];
     modalAnswer.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     modalAnswer.delegate = self;
     [self presentViewController:modalAnswer
                        animated:YES
                      completion:^{
                          [self dismissKeyboard];
+                         [self stopTimer];
+                         [self questionsWatchDog];
                      }];
 }
 
@@ -261,7 +262,9 @@ static NSString *const kPlayedKey = @"score";
         int ind = arc4random() % NumberOfQuestionInDatabase;
         //    ind = 9507; //for test
         NSLog(@"Downloading %d question...", ind);
-        NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder > %d)",ind];
+        NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder BETWEEN %@)",
+                                      @[[NSNumber numberWithInt:ind],
+                                         [NSNumber numberWithInt:ind+NumberOfQuestionForDownload+1]]];
         PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
         questQuery.limit = NumberOfQuestionForDownload;
         if ( questionCountInSqlDB == 0 ) {

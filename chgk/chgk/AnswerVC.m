@@ -26,7 +26,7 @@
 @property (nonatomic, weak) IBOutlet UIView *rightSignal;
 @property (nonatomic, weak) IBOutlet UIImageView *correctnessImage;
 
-@property (nonatomic, weak) OneRound *oneRound;
+@property (nonatomic, strong, readonly) OneRound *oneRound;
 @property (nonatomic) BOOL isRight;
 
 @property (nonatomic,strong) NSRegularExpression *trimmingRegex;
@@ -166,8 +166,6 @@
     UIImage *image = [UIImage imageNamed: @"favorite_on.png"];
     [self.addToFavoriteButton setImage:image forState: UIControlStateSelected];
 
-    
-    [self.delegate questionsWatchDog];
 }
 
 @end

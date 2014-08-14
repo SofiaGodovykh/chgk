@@ -40,13 +40,10 @@
                                        action:@selector(didTouchOKBarButtonItem:)];;
         [self.navigationItem setRightBarButtonItem:okBarButtonItem];
     }
-    // CR: Don't use the description property for anything besides debugging.
-    self.textView.text = [self.question fullInfo];
-//    
-//    self.label1.text = [self.question fullInfo];
-//    CGRect newFrame = self.label1.frame;
-//    CGSize labelSize = [self.label1 sizeThatFits:CGSizeMake(newFrame.size.width, CGFLOAT_MAX)];
-//    [self.label1 sizeToFit];
+    [self.textView setAttributedText:
+     [self.question fullInfoWithMainFont:[UIFont systemFontOfSize:11]
+                             andBoldFont:[UIFont boldSystemFontOfSize:14]]];
+     self.textView.textColor = [UIColor darkGrayColor];
 }
 
 - (void)didTouchOKBarButtonItem:(UIBarButtonItem *)sender

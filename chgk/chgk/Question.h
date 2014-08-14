@@ -10,7 +10,7 @@
 
 @class PFObject;
 
-@interface Question : NSObject
+@interface Question : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) NSString *question;
 @property (nonatomic, copy, readonly) NSString *answer;
@@ -24,6 +24,6 @@
 - (instancetype)initWithParseObject:(PFObject *)object;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (id)init NS_UNAVAILABLE;
-- (NSString *)fullInfo;
+- (NSMutableAttributedString *)fullInfoWithMainFont:(UIFont *)mainFont andBoldFont:(UIFont *)boldFont;
 
 @end
