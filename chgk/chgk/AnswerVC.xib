@@ -102,8 +102,11 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96g-cQ-cFJ">
-                    <rect key="frame" x="101" y="293" width="118" height="30"/>
+                    <rect key="frame" x="85" y="293" width="150" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="24l-Q3-1JG"/>
+                    </constraints>
                     <state key="normal" title="Засчитать ответ">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -112,8 +115,11 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vN-4u-nyz">
-                    <rect key="frame" x="89" y="338" width="142" height="30"/>
+                    <rect key="frame" x="85" y="338" width="150" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="t39-6M-vFi"/>
+                    </constraints>
                     <state key="normal" title="Следующий вопрос">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -122,15 +128,19 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Без аннотации" translatesAutoresizingMaskIntoConstraints="NO" id="xxI-dU-0X6">
-                    <rect key="frame" x="10" y="373" width="300" height="165"/>
+                    <rect key="frame" x="10" y="373" width="300" height="155"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhh-56-UZC">
-                    <rect key="frame" x="104" y="538" width="112" height="30"/>
+                    <rect key="frame" x="85" y="528" width="150" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="Yk7-cj-Qfr"/>
+                        <constraint firstAttribute="height" constant="40" id="pNG-iP-aOi"/>
+                    </constraints>
                     <state key="normal" title="Закончить игру">
                         <color key="titleColor" red="1" green="0.047582545186654057" blue="0.21416055963896274" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

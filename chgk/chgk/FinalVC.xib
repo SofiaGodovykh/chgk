@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FinalVC">
@@ -20,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfG-Fc-Qhq">
-                    <rect key="frame" x="85" y="145" width="150" height="40"/>
+                    <rect key="frame" x="85" y="120" width="150" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -32,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gk-U5-4ir">
-                    <rect key="frame" x="85" y="235" width="150" height="30"/>
+                    <rect key="frame" x="85" y="215" width="150" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="trq-gW-iLT"/>
@@ -85,9 +86,12 @@
                         <action selector="shareToTwitterPressed:" destination="-1" eventType="touchUpInside" id="lWD-qW-mO0"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzd-Oa-1iN">
-                    <rect key="frame" x="85" y="273" width="150" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzd-Oa-1iN">
+                    <rect key="frame" x="85" y="265" width="150" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="Wdm-qy-Ign"/>
+                    </constraints>
                     <state key="normal" title="Меню">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -98,13 +102,15 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="4gk-U5-4ir" firstAttribute="top" secondItem="MfG-Fc-Qhq" secondAttribute="bottom" constant="50" id="8AP-GW-8ly"/>
-                <constraint firstItem="MfG-Fc-Qhq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="145" id="GkF-vI-Td7"/>
-                <constraint firstItem="j1G-nW-mvx" firstAttribute="top" secondItem="4gk-U5-4ir" secondAttribute="bottom" constant="50" id="Nk1-Fz-4Wu"/>
+                <constraint firstItem="4gk-U5-4ir" firstAttribute="centerY" secondItem="MfG-Fc-Qhq" secondAttribute="bottom" constant="70" id="8AP-GW-8ly"/>
+                <constraint firstItem="gzd-Oa-1iN" firstAttribute="top" secondItem="4gk-U5-4ir" secondAttribute="bottom" constant="20" id="Do4-Ty-W3s"/>
+                <constraint firstItem="MfG-Fc-Qhq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="GkF-vI-Td7"/>
                 <constraint firstAttribute="trailing" secondItem="oaQ-PW-w9F" secondAttribute="trailing" constant="70" id="NwO-7d-gqe"/>
                 <constraint firstAttribute="centerX" secondItem="j1G-nW-mvx" secondAttribute="centerX" id="VRh-Md-PEP"/>
+                <constraint firstAttribute="centerX" secondItem="gzd-Oa-1iN" secondAttribute="centerX" id="izd-Tk-GJV"/>
                 <constraint firstItem="oaQ-PW-w9F" firstAttribute="top" secondItem="j1G-nW-mvx" secondAttribute="bottom" constant="50" id="kTf-jB-Z7N"/>
                 <constraint firstItem="b4T-Zk-2r4" firstAttribute="top" secondItem="j1G-nW-mvx" secondAttribute="bottom" constant="50" id="qPL-pc-pGh"/>
+                <constraint firstItem="j1G-nW-mvx" firstAttribute="top" secondItem="gzd-Oa-1iN" secondAttribute="bottom" constant="20" id="s20-WD-uSp"/>
                 <constraint firstItem="b4T-Zk-2r4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="54" id="unp-5i-zhb"/>
                 <constraint firstAttribute="centerX" secondItem="4gk-U5-4ir" secondAttribute="centerX" id="v8D-do-ZXL"/>
                 <constraint firstAttribute="centerX" secondItem="MfG-Fc-Qhq" secondAttribute="centerX" id="z0W-Ge-x3c"/>
