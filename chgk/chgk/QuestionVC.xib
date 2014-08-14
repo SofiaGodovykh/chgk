@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="answer" destination="NNC-ze-LaH" id="E19-mD-paf"/>
                 <outlet property="confirmButton" destination="7Jr-pA-cVV" id="ax1-A8-GVR"/>
+                <outlet property="microphoneButton" destination="4XP-En-f8S" id="MJQ-HA-VaU"/>
                 <outlet property="question" destination="Fwt-oy-U0k" id="xsK-sH-7sS"/>
                 <outlet property="questionCount" destination="dwM-JX-6h5" id="d6j-Mi-fsD"/>
                 <outlet property="score" destination="uFh-Lf-VAk" id="oRU-MV-LqN"/>
@@ -115,18 +116,18 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0w7-Rp-xPd">
-                    <rect key="frame" x="0.0" y="458" width="320" height="46"/>
+                    <rect key="frame" x="-1" y="458" width="321" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NNC-ze-LaH">
-                            <rect key="frame" x="10" y="8" width="203" height="30"/>
+                            <rect key="frame" x="44" y="8" width="170" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Jr-pA-cVV">
-                            <rect key="frame" x="218" y="8" width="100" height="30"/>
+                            <rect key="frame" x="219" y="8" width="100" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="zQo-Jr-AKq"/>
@@ -139,15 +140,30 @@
                                 <action selector="confirmPressed:" destination="-1" eventType="touchUpInside" id="0R3-dz-BMi"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XP-En-f8S">
+                            <rect key="frame" x="15" y="7" width="19" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="microphone.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="microphonePressed:" destination="-1" eventType="touchUpInside" id="WkL-Ji-OUV"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="7Jr-pA-cVV" secondAttribute="centerY" id="0qa-TZ-PrT"/>
+                        <constraint firstItem="NNC-ze-LaH" firstAttribute="leading" secondItem="4XP-En-f8S" secondAttribute="trailing" constant="10" id="7kx-Z9-2Ey"/>
                         <constraint firstAttribute="trailing" secondItem="7Jr-pA-cVV" secondAttribute="trailing" constant="2" id="Mzu-8K-gqE"/>
+                        <constraint firstAttribute="bottom" secondItem="4XP-En-f8S" secondAttribute="bottom" constant="7" id="Txm-KI-D8b"/>
+                        <constraint firstItem="4XP-En-f8S" firstAttribute="leading" secondItem="0w7-Rp-xPd" secondAttribute="leading" constant="15" id="YUa-RX-Tkq"/>
                         <constraint firstItem="7Jr-pA-cVV" firstAttribute="leading" secondItem="NNC-ze-LaH" secondAttribute="trailing" constant="5" id="a57-5c-RWa"/>
+                        <constraint firstItem="4XP-En-f8S" firstAttribute="top" secondItem="0w7-Rp-xPd" secondAttribute="top" constant="7" id="m3N-OM-7vS"/>
                         <constraint firstAttribute="height" constant="46" id="obj-xb-SEO"/>
+                        <constraint firstAttribute="centerY" secondItem="4XP-En-f8S" secondAttribute="centerY" id="pSN-Rg-0mT"/>
                         <constraint firstAttribute="centerY" secondItem="NNC-ze-LaH" secondAttribute="centerY" id="u88-wp-pBC"/>
-                        <constraint firstItem="NNC-ze-LaH" firstAttribute="leading" secondItem="0w7-Rp-xPd" secondAttribute="leading" constant="10" id="zI5-fW-PrG"/>
+                        <constraint firstItem="NNC-ze-LaH" firstAttribute="leading" secondItem="0w7-Rp-xPd" secondAttribute="leading" constant="44" id="zI5-fW-PrG"/>
                     </constraints>
                 </view>
             </subviews>
@@ -172,6 +188,7 @@
         </view>
     </objects>
     <resources>
+        <image name="microphone.png" width="28" height="48"/>
         <image name="timerIcon.png" width="256" height="256"/>
     </resources>
 </document>

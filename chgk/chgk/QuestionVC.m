@@ -15,6 +15,8 @@
 #import "ContinueDelegate.h"
 #import "DB.h"
 #import <Parse/Parse.h>
+#import <YandexSpeechKit/SpeechKit.h>
+#import "YSKSViewController.h"
 
 static const NSUInteger TimerMaximumSeconds = 60;
 static const NSUInteger NumberOfQuestionInDatabase = 17589;
@@ -26,7 +28,13 @@ static NSString *const kWinsKey = @"wins";
 static NSString *const kLoosesKey = @"looses";
 static NSString *const kPlayedKey = @"score";
 
-@interface QuestionVC () <ContinueDelegate>
+@interface QuestionVC () <YSKSpeechRecognitionViewControllerDelegate, ContinueDelegate>
+
+@property(nonatomic, retain) YSKSpeechRecognitionViewController *recognizerViewController;
+
+@end
+
+@interface QuestionVC () <YSKSpeechRecognitionViewControllerDelegate, ContinueDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *score;
 @property (nonatomic, weak) IBOutlet UILabel *timerLabel;
@@ -34,6 +42,7 @@ static NSString *const kPlayedKey = @"score";
 @property (nonatomic, weak) IBOutlet UITextField *answer;
 @property (nonatomic, weak) IBOutlet UITextView *question;
 @property (nonatomic, weak) IBOutlet UIButton *confirmButton;
+@property (nonatomic, weak) IBOutlet UIButton *microphoneButton;
 //@property (nonatomic, weak) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property int seconds;
 @property (nonatomic, strong) NSTimer *timer;
@@ -144,6 +153,53 @@ static NSString *const kPlayedKey = @"score";
                      completion:^{
                          [self dismissKeyboard];
                      }];
+}
+
+- (IBAction)microphonePressed:(id)sender
+{
+    NSLog(@"Start button pressed");
+    
+    [self startSpeechRecognition];
+}
+
+- (void)startSpeechRecognition {
+    self.recognizerViewController = [[YSKSpeechRecognitionViewController alloc] initWithLanguage:@"ru-RU" model:@"general"];
+    self.recognizerViewController.delegate = self;
+    
+    [self presentViewController:self.recognizerViewController animated:YES completion:^{}];
+    
+    [self.recognizerViewController start];
+}
+
+- (void)speechRecognitionViewControllerDidCancel:(YSKSpeechRecognitionViewController *)speechRecognitionViewController
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:@"Recognition cancelled by user"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+    
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    self.recognizerViewController = nil;
+}
+
+- (void)speechRecognitionViewController:(YSKSpeechRecognitionViewController *)speechRecognitionViewController didFinishWithResult:(NSString *)result
+{
+    [self.answer setText:result];
+    
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    self.recognizerViewController = nil;
+}
+
+- (void) speechRecognitionViewController:(YSKSpeechRecognitionViewController *)speechRecognitionViewController didFailWithError:(YSKError *)error {
+    [self.answer setText:[error localizedDescription]];
+    
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    self.recognizerViewController = nil;
 }
 
 - (void)menuButtonTapped{

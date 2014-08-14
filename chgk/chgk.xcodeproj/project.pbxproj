@@ -47,6 +47,10 @@
 		84980409199B671000AE3E6F /* favorite_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 84980407199B671000AE3E6F /* favorite_on.png */; };
 		8498040D199B7C9900AE3E6F /* ShowQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498040B199B7C9900AE3E6F /* ShowQuestionVC.m */; };
 		8498040E199B7C9900AE3E6F /* ShowQuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8498040C199B7C9900AE3E6F /* ShowQuestionVC.xib */; };
+		84980410199C80D400AE3E6F /* microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 8498040F199C80D400AE3E6F /* microphone.png */; };
+		84980412199C894100AE3E6F /* YandexSpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84980411199C894100AE3E6F /* YandexSpeechKit.framework */; };
+		84980418199C8A9E00AE3E6F /* YSKSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84980417199C8A9E00AE3E6F /* YSKSViewController.m */; };
+		8498041A199C90F900AE3E6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84980419199C90F900AE3E6F /* AVFoundation.framework */; };
 		849F74591990C5A40051CF7E /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F74571990C5A40051CF7E /* QuestionVC.m */; };
 		849F745A1990C5A40051CF7E /* QuestionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849F74581990C5A40051CF7E /* QuestionVC.xib */; };
 		849F745D1990D7760051CF7E /* timerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 849F745B1990D7760051CF7E /* timerIcon.png */; };
@@ -132,6 +136,11 @@
 		8498040A199B7C9900AE3E6F /* ShowQuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowQuestionVC.h; sourceTree = "<group>"; };
 		8498040B199B7C9900AE3E6F /* ShowQuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowQuestionVC.m; sourceTree = "<group>"; };
 		8498040C199B7C9900AE3E6F /* ShowQuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowQuestionVC.xib; sourceTree = "<group>"; };
+		8498040F199C80D400AE3E6F /* microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microphone.png; sourceTree = "<group>"; };
+		84980411199C894100AE3E6F /* YandexSpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexSpeechKit.framework; sourceTree = SOURCE_ROOT; };
+		84980416199C8A9E00AE3E6F /* YSKSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSKSViewController.h; path = chgk/YSKSViewController.h; sourceTree = SOURCE_ROOT; };
+		84980417199C8A9E00AE3E6F /* YSKSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSKSViewController.m; path = chgk/YSKSViewController.m; sourceTree = SOURCE_ROOT; };
+		84980419199C90F900AE3E6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		849F74561990C5A40051CF7E /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
 		849F74571990C5A40051CF7E /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
 		849F74581990C5A40051CF7E /* QuestionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionVC.xib; sourceTree = "<group>"; };
@@ -160,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8498041A199C90F900AE3E6F /* AVFoundation.framework in Frameworks */,
 				842E5BDF1998ADA00062E582 /* libsqlite3.0.dylib in Frameworks */,
 				80C8B8531990F8010080290F /* SystemConfiguration.framework in Frameworks */,
 				80C8B8511990F7FB0080290F /* StoreKit.framework in Frameworks */,
@@ -174,6 +184,7 @@
 				84DE1091198603860058C5B4 /* UIKit.framework in Frameworks */,
 				80C8B8411990F7A30080290F /* Parse.framework in Frameworks */,
 				84DE108D198603860058C5B4 /* Foundation.framework in Frameworks */,
+				84980412199C894100AE3E6F /* YandexSpeechKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +204,8 @@
 		80C8B8861998E0490080290F /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
+				84980416199C8A9E00AE3E6F /* YSKSViewController.h */,
+				84980417199C8A9E00AE3E6F /* YSKSViewController.m */,
 				80C8B8871998E0490080290F /* FMDatabase.h */,
 				80C8B8881998E0490080290F /* FMDatabase.m */,
 				80C8B8891998E0490080290F /* FMDatabaseAdditions.h */,
@@ -248,6 +261,8 @@
 		84DE108B198603860058C5B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84980419199C90F900AE3E6F /* AVFoundation.framework */,
+				84980411199C894100AE3E6F /* YandexSpeechKit.framework */,
 				842E5BDE1998ADA00062E582 /* libsqlite3.0.dylib */,
 				80C8B8521990F8010080290F /* SystemConfiguration.framework */,
 				80C8B8501990F7FB0080290F /* StoreKit.framework */,
@@ -280,6 +295,7 @@
 				849F74561990C5A40051CF7E /* QuestionVC.h */,
 				849F74571990C5A40051CF7E /* QuestionVC.m */,
 				849F74581990C5A40051CF7E /* QuestionVC.xib */,
+				8498040F199C80D400AE3E6F /* microphone.png */,
 				80C8B85D199212310080290F /* AnswerVC.h */,
 				80C8B85E199212310080290F /* AnswerVC.m */,
 				80C8B85F199212310080290F /* AnswerVC.xib */,
@@ -421,6 +437,7 @@
 				84DE1097198603860058C5B4 /* InfoPlist.strings in Resources */,
 				80C8B85B1991019A0080290F /* MenuVC.xib in Resources */,
 				84980408199B671000AE3E6F /* favorite.png in Resources */,
+				84980410199C80D400AE3E6F /* microphone.png in Resources */,
 				80C8B8A5199A0C530080290F /* Wrong.png in Resources */,
 				80C8B8A3199A0C530080290F /* OK.png in Resources */,
 				80C8B8AC199A2DFB0080290F /* FullQuestionInfoVC.xib in Resources */,
@@ -462,6 +479,7 @@
 				80C8B85A1991019A0080290F /* MenuVC.m in Sources */,
 				842E5BF3199A02550062E582 /* FinalVC.m in Sources */,
 				842E5BC31998AAD70062E582 /* DB.m in Sources */,
+				84980418199C8A9E00AE3E6F /* YSKSViewController.m in Sources */,
 				80C8B8641992351B0080290F /* OneRound.m in Sources */,
 				84DE1099198603860058C5B4 /* main.m in Sources */,
 				80C8B89D1999C81B0080290F /* FavoriteVC.m in Sources */,
