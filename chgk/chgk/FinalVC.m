@@ -85,7 +85,7 @@
 - (IBAction)shareToFacebookPressed:(id)sender
 {
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-    [controller setInitialText:@"score"];
+    [controller setInitialText:@""];
     [self presentViewController:controller animated:YES completion:Nil];
 }
 

@@ -118,22 +118,17 @@
 
 - (NSArray *)questionsWithNumbers:(NSArray *)idByOrder
 {
-    NSMutableString *ids = [NSMutableString string];
-    for (NSNumber *currentID in idByOrder){
-        [ids appendFormat:@"%@,", currentID];
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for(int i = 0; i < [idByOrder count]; i++)
+    {
+        FMResultSet *result = [self.database executeQuery: [NSString stringWithFormat: @"SELECT * FROM Exercise where idByOrder = %ld", [[idByOrder objectAtIndex:i] integerValue]]];
+        while([result next])
+        {
+            [array addObject:[[Question alloc] initWithDictionary : [result resultDictionary]]];
+            break;
+        }
     }
-    NSRange range;
-    range.location = ids.length - 1;
-    range.length = 1;
-    [ids deleteCharactersInRange: range];
-    NSString *query = [NSString stringWithFormat:
-                       @"SELECT * FROM Exercise WHERE idByOrder in (%@)",
-                       ids];
-    FMResultSet *result = [self.database executeQuery:query];
-    NSMutableArray *array = [NSMutableArray array];
-    while ([result next]) {
-        [array addObject:[[Question alloc] initWithDictionary:[result resultDictionary]]];
-    }
+    
     return [array copy];
 }
 
