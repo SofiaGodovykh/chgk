@@ -131,19 +131,18 @@ static NSString *const kPlayedKey = @"score";
 #pragma mark dealing with modal windows
 - (IBAction)confirmPressed:(id)sender
 {
-//TODO: send copy of oneRound
+    self.oneRound.playerAnswer = self.answer.text;
+    [self.playedQuestions addObject:[NSNumber numberWithInteger:
+                                     self.oneRound.currentQuestion.IdByOrder]];
+    [self.questionBuffer removeObject:self.oneRound.currentQuestion];
+    [self stopTimer];
     AnswerVC *modalAnswer = [[AnswerVC alloc]initWithRound:self.oneRound];
     modalAnswer.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     modalAnswer.delegate = self;
     [self presentViewController:modalAnswer
                        animated:YES
                      completion:^{
-                         [self.playedQuestions addObject:[NSNumber numberWithInteger:
-                                                          self.oneRound.currentQuestion.IdByOrder]];
-                         [self.questionBuffer removeObject:self.oneRound.currentQuestion];
                          [self dismissKeyboard];
-                         [self stopTimer];
-                         self.oneRound.playerAnswer = self.answer.text;
                      }];
 }
 
@@ -196,6 +195,7 @@ static NSString *const kPlayedKey = @"score";
 }
 
 #pragma mark working with database
+//downloads questions from parse.com, and puts it to sql database.
 - (void)downloadSingleQuestion
 {
     DB *database = [DB standardBase];
