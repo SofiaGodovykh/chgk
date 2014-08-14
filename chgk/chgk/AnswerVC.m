@@ -148,7 +148,7 @@
     
     self.playerAnswer.text = self.oneRound.playerAnswer;
     
-    if([self.playerAnswer.text  isEqual: @""])
+    if([self.playerAnswer.text  isEqual: @""] || (self.isRight))
     {
         [self.makeCorrectButton setEnabled:false];
     }

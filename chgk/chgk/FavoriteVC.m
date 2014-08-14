@@ -117,33 +117,33 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-//
-//- (void)tableView:(UITableView *)tableView
-//        commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-//        forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        //action after delete button is pressed
-//        if (self.isDeletable){
-//            NSMutableArray *mutableQuestions = [self.questions mutableCopy];
-//            
-//            Question *questionToDelete = mutableQuestions[indexPath.row];
-//            [[DB standardBase] removeFromFavorite:questionToDelete.IdByOrder];
-//
-//            [mutableQuestions removeObjectAtIndex:indexPath.row];
-//            self.questions = [mutableQuestions copy];
-//            
-//            [self.tableView reloadData];
-//        }
-//        else {
-//            UIAlertView *quickInfoAlert = [[UIAlertView alloc] initWithTitle:@"Эй!"
-//                                                                     message:@"Не пытайтесь изменить ход истории!"
-//                                                                    delegate:nil
-//                                                           cancelButtonTitle:@"OK"
-//                                                           otherButtonTitles:nil];
-//            [quickInfoAlert show];
-//        }
-//    }
-//}
+
+- (void)tableView:(UITableView *)tableView
+        commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+        forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //action after delete button is pressed
+        if (self.isDeletable){
+            NSMutableArray *mutableQuestions = [self.questions mutableCopy];
+            
+            Question *questionToDelete = mutableQuestions[indexPath.row];
+            [[DB standardBase] removeFromFavorite:questionToDelete.IdByOrder];
+
+            [mutableQuestions removeObjectAtIndex:indexPath.row];
+            self.questions = [mutableQuestions copy];
+            
+            [self.tableView reloadData];
+        }
+        else {
+            UIAlertView *quickInfoAlert = [[UIAlertView alloc] initWithTitle:@"Эй!"
+                                                                     message:@"Не пытайтесь изменить ход истории!"
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil];
+            [quickInfoAlert show];
+        }
+    }
+}
 
 @end

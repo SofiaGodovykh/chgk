@@ -20,7 +20,6 @@
 
 @implementation MenuVC
 
-//TODO: I totaly don't like how startGamePressed and continueGamePressed actions works.
 - (IBAction)startGamePressed:(id)sender
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
