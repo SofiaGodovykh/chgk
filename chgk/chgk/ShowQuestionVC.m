@@ -15,16 +15,26 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property (nonatomic, weak) IBOutlet UIButton *okButton;
 @property (nonatomic, strong) NSString *text;
+
 @end
 
 @implementation ShowQuestionVC
 @synthesize text = text_;
+
+- (id)init
+{
+    NSLog(@"Please use initWithQuestionText: instead");
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
 
 - (instancetype)initWithQuestionText:(NSString *)text
 {
     if (self = [super init]){
         text_ = text;
     }
+    
     return self;
 }
 
@@ -37,7 +47,7 @@
     CGSize sizeThatFitsTextView = [self.fullText sizeThatFits:
                                        CGSizeMake(self.fullText.frame.size.width, MAXFLOAT)];
 
-    self.textViewHeightConstraint.constant = ceilf(MIN(sizeThatFitsTextView.height,422)) +
+    self.textViewHeightConstraint.constant = ceilf(MIN(sizeThatFitsTextView.height,400)) +
                                                 self.okButton.frame.size.height;
     UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc]
                                              initWithTarget:self

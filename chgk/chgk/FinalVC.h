@@ -10,7 +10,12 @@
 
 @interface FinalVC : UIViewController
 
-// CR: Why not to use one object for game info?
+/**
+ *  Performs no initialization, use -initWithRight:wrongAnswers:playedID instead
+ */
+- (id)init NS_UNAVAILABLE;
+
+//TODO: send a single object with game info.
 - (instancetype)initWithRight:(int)right wrongAnswers:(int)wrong playedID:(NSArray *)played;
 
 @end

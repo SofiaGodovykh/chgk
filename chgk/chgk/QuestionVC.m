@@ -20,6 +20,7 @@ static const NSUInteger TimerMaximumSeconds = 60;
 static const NSUInteger NumberOfQuestionInDatabase = 17589;
 static const NSUInteger NumberOfQuestionForDownload = 100;
 static const NSUInteger MinimumNumberOfQuestionInDatabase = 200;
+static const NSUInteger NumberOfQuestionInOneBunch = 10;
 
 static NSString *const DefaultFileNameForLocalStore = @"PlayedQuestionsAndScore.dat";
 static NSString *const kWinsKey = @"wins";
@@ -123,12 +124,11 @@ static NSString *const kPlayedKey = @"score";
                       objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGRect aRect = self.view.frame;
     aRect.size.height += kbSize.height;
-    // CR: Don't change self.view frame, it is managed by a superview, add a subview with all
-    // content and resize it.
+    //TODO: add a subview with some content and change it's size, instead of self.view size
     self.view.frame = aRect;
 }
 
-#pragma mark dealing with modal windows
+#pragma mark modal windows
 - (IBAction)confirmPressed:(id)sender
 {
     self.oneRound.playerAnswer = self.answer.text;
@@ -197,18 +197,20 @@ static NSString *const kPlayedKey = @"score";
 
 #pragma mark working with database
 //downloads questions from parse.com, and puts it to sql database.
-- (void)downloadSingleQuestion
+- (void)downloadQuestions
 {
     DB *database = [DB standardBase];
-    NSInteger questionCountInSqlDB = [database countOfItemsInExercise];
+    NSInteger questionCountInSqlDB = [database countOfItemsInDatabase];
     
     if ( questionCountInSqlDB < MinimumNumberOfQuestionInDatabase ){
-        int ind = arc4random() % NumberOfQuestionInDatabase;
+        int ind = arc4random() % (NumberOfQuestionInDatabase-NumberOfQuestionForDownload);
         //    ind = 9507; //for test
         NSLog(@"Downloading %d question...", ind);
-        NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder BETWEEN %@)",
+        //TODO:change predicate when picture will be pasted.
+        NSPredicate *questPredicate = [NSPredicate predicateWithFormat:@"(IdByOrder BETWEEN %@) AND (Picture = %@)",
                                       @[[NSNumber numberWithInt:ind],
-                                         [NSNumber numberWithInt:ind+NumberOfQuestionForDownload+1]]];
+                                        [NSNumber numberWithInt:ind+NumberOfQuestionForDownload]],
+                                         @""];
         PFQuery *questQuery = [PFQuery queryWithClassName:@"Exercise" predicate:questPredicate];
         questQuery.limit = NumberOfQuestionForDownload;
         if ( questionCountInSqlDB == 0 ) {
@@ -241,8 +243,9 @@ static NSString *const kPlayedKey = @"score";
 {
     self.question.text = @"Загрузка вопроса...";
     if ( [self.questionBuffer count]==0 ){
-        [self downloadSingleQuestion];
-        self.questionBuffer = [[[DB standardBase] bunchOfQuestions] mutableCopy];
+        [self downloadQuestions];
+        self.questionBuffer = [[[DB standardBase] bunchOfQuestions:NumberOfQuestionInOneBunch]
+                               mutableCopy];
         NSLog(@"Doing database request");
     }
     self.oneRound.currentQuestion = [self.questionBuffer lastObject];
@@ -295,6 +298,12 @@ static NSString *const kPlayedKey = @"score";
     }
 }
 
+- (void)stopTimer
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
 - (void)refreshScoreLabel
 {
     self.score.text = [NSString stringWithFormat:
@@ -303,12 +312,6 @@ static NSString *const kPlayedKey = @"score";
                        self.oneRound.wrongAnswers ];
     int questCount = self.oneRound.rightAnswers + self.oneRound.wrongAnswers + 1;
     self.questionCount.text = [NSString stringWithFormat:@"№ %d", questCount];
-}
-
-- (void)stopTimer
-{
-    [self.timer invalidate];
-    self.timer = nil;
 }
 
 - (void)viewDidLoad
@@ -356,6 +359,7 @@ static NSString *const kPlayedKey = @"score";
     self.oneRound.rightAnswers = 0;
     [self saveScore];
 }
+
 - (void)saveScore
 {
     NSDictionary *saveData = @{kWinsKey   : [NSNumber numberWithInteger:self.oneRound.rightAnswers],

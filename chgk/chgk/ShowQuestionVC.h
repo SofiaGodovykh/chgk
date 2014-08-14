@@ -12,13 +12,26 @@
 
 @protocol ShowQuestionVCDelegate <NSObject>
 
+/**
+ *  Notifies the receiver that the sender has finished its job
+ *  (showing text of just played question).
+ */
 - (void)showQuestionVCDidFinished:(ShowQuestionVC *)sender;
 
 @end
 
 @interface ShowQuestionVC : UIViewController
 
+/**
+ *  Returns the object that handles the delegated duties.
+ */
 @property (nonatomic, strong) id<ShowQuestionVCDelegate> delegate;
+
+/**
+ *  Performs no initialization, use -initWithQuestionText: instead
+ */
+- (id)init NS_UNAVAILABLE;
+
 - (instancetype)initWithQuestionText:(NSString *)text;
 
 @end

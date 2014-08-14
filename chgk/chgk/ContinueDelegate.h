@@ -14,8 +14,8 @@
 
 - (void)removeMenu;
 - (void)nextQuestionAfterAnswer:(BOOL)isRight;
+- (void)endGameWithLastAnswer:(BOOL)isRight;
 - (void)questionsWatchDog;
 - (void)stopTimer;
-- (void)endGameWithLastAnswer:(BOOL)isRight;
 
 @end

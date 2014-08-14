@@ -13,14 +13,24 @@
 
 @protocol FullQuestionInfoVCDelegate <NSObject>
 
+/**
+ *  Notifies the receiver that the sender has finished its job (showing full question info).
+ */
 - (void)FullQuestionInfoVCdidFinish:(FullQuestionInfoVC *)sender ;
 
 @end
 
 @interface FullQuestionInfoVC : UIViewController
 
+/**
+ *  Returns the object that handles the delegated duties.
+ */
 @property (nonatomic, weak) id<FullQuestionInfoVCDelegate> delegate;
 
+/**
+ *  Performs no initialization, use -initWithQuestion instead
+ */
+- (id)init NS_UNAVAILABLE;
 - (instancetype)initWithQuestion:(Question *)question;
 
 @end

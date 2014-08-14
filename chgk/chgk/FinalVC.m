@@ -33,6 +33,15 @@
 @synthesize wrongAnswers = wrongAnswers_;
 @synthesize playedID = playedID_;
 
+#pragma mark initialization
+- (id)init
+{
+    NSLog(@"Please use initWithRight:wrongAnswers:playedID: instead");
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
 - (instancetype)initWithRight:(int)right wrongAnswers:(int)wrong playedID:(NSArray *)played
 {
     if (self = [super init]){
@@ -49,14 +58,15 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"%d:%d",
                             self.rightAnswers,
                             self.wrongAnswers];
-    // Do any additional setup after loading the view from its nib.
 }
 
+#pragma mark actions
 - (IBAction)startGamePressed:(id)sender
 {
     QuestionVC *questionVC = [[QuestionVC alloc]init];
     [questionVC startNewGame];
-    [self.navigationController setViewControllers:[NSArray arrayWithObject:questionVC] animated:YES];
+    [self.navigationController setViewControllers:
+     [NSArray arrayWithObject:questionVC] animated:YES];
 }
 
 - (IBAction)statisticPressed:(id)sender
@@ -74,7 +84,29 @@
 - (IBAction)menuPressed:(id)sender
 {
     MenuVC *menuVC = [[MenuVC alloc]init];
-    [self.navigationController setViewControllers:[NSArray arrayWithObject:menuVC] animated:YES];
+    [self.navigationController setViewControllers:
+     [NSArray arrayWithObject:menuVC] animated:YES];
+}
+
+- (IBAction)shareToFacebookPressed:(id)sender
+{
+    SLComposeViewController *controller = [SLComposeViewController
+                                           composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [controller setInitialText:[NSString stringWithFormat:
+                                @"My score is chgkGame is : %@",
+                                self.scoreLabel.text]];
+    [self presentViewController:controller animated:YES completion:Nil];
+}
+
+- (IBAction)shareToTwitterPressed:(id)sender
+{
+    SLComposeViewController *controller = [SLComposeViewController
+                                           composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [controller setInitialText:[NSString stringWithFormat:
+                                @"My score is chgkGame is : %@",
+                                self.scoreLabel.text]];
+    [self presentViewController:controller animated:YES completion:Nil];
+
 }
 
 - (void)favoriteVCdidFinish:(FavoriteVC *)sender
@@ -82,18 +114,4 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)shareToFacebookPressed:(id)sender
-{
-    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-    [controller setInitialText:@""];
-    [self presentViewController:controller animated:YES completion:Nil];
-}
-
-- (IBAction)shareToTwitterPressed:(id)sender
-{
-    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-    [controller setInitialText:@"score"];
-    [self presentViewController:controller animated:YES completion:Nil];
-
-}
 @end

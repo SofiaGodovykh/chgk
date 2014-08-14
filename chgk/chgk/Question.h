@@ -21,9 +21,17 @@
 @property (nonatomic, readonly) NSInteger ID;
 @property (nonatomic, readonly) NSInteger IdByOrder;
 
+/**
+ *  Performs no initialization, use -initWithParseObject or initWithDictionary instead
+ */
+- (id)init NS_UNAVAILABLE;
 - (instancetype)initWithParseObject:(PFObject *)object;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-- (id)init NS_UNAVAILABLE;
-- (NSMutableAttributedString *)fullInfoWithMainFont:(UIFont *)mainFont andBoldFont:(UIFont *)boldFont;
+
+
+/**
+ *  Returns attributed description of question
+ */
+- (NSMutableAttributedString *)fullInfoWithMainFont:(UIFont *)mainFont andTitleFont:(UIFont *)boldFont;
 
 @end

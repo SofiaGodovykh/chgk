@@ -36,16 +36,19 @@
 - (DB *)init
 {
     if(self == [super init]){
-        NSString *path = @"/Users/admin/Documents/kk/database.sqlite";
-        //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
-                                                    //         NSUserDomainMask,
-                                                     //        YES);
-      //  NSString *path = paths[0];
-        //path = [path stringByAppendingPathComponent:@"chgkDB.sqlite"];
+        //for tests
+//        NSString *path = @"/Users/signatov/Documents/kk/database.sqlite";
+
+        //for production
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
+                                                             NSUserDomainMask,
+                                                             YES);
+        NSString *path = paths[0];
+        path = [path stringByAppendingPathComponent:@"chgkDB.sqlite"];
         
         _database = [FMDatabase databaseWithPath:path];
         [_database open];
-        //don't forget to remove it
+        //beware with it
         //[_database executeUpdate:@"delete from Exercise"];
         [_database executeUpdate:@"create table if not exists Exercise(idByOrder int primary key, question text, answer text, annotation text, authors text, sources text, picture text, id int, isUsed int, isFavorited int)"];
     }
@@ -74,17 +77,20 @@
          }
          [self.database commit];
      }];
-    NSLog(@"Number of question in sql DB : %ld", [self countOfItemsInExercise]);
+    NSLog(@"Number of question in sql DB : %ld", [self countOfItemsInDatabase]);
 }
 
-- (NSInteger)countOfItemsInExercise
+- (NSInteger)countOfItemsInDatabase
 {
     return [self.database intForQuery:@"SELECT COUNT(idByOrder) FROM Exercise WHERE isUsed=0"];
 }
 
--(NSArray*)bunchOfQuestions
+- (NSArray *)bunchOfQuestions:(NSInteger)count
 {
-    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise WHERE isUsed=0 group by random() limit 10"];
+    FMResultSet *result = [self.database executeQuery:
+                           [NSString stringWithFormat:
+                            @"SELECT * FROM Exercise WHERE isUsed=0 group by random() limit %ld",
+                            count]];
     NSMutableArray *array = [NSMutableArray array];
     
     while([result next])
@@ -108,10 +114,11 @@
     range.length = 1;
     
     [ids deleteCharactersInRange: range];
-    NSMutableString *update = [[NSMutableString alloc] initWithString:@"UPDATE Exercise SET isUsed=1 where idByOrder in ("];
+    NSMutableString *update = [[NSMutableString alloc] initWithString:
+                               @"UPDATE Exercise SET isUsed=1 where idByOrder in ("];
     [update appendString:ids];
     [update appendString:@")"];
-   [self.database executeUpdate: update];
+    [self.database executeUpdate: update];
     
     return [array copy];
 }
@@ -121,10 +128,13 @@
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for(int i = 0; i < [idByOrder count]; i++)
     {
-        FMResultSet *result = [self.database executeQuery: [NSString stringWithFormat: @"SELECT * FROM Exercise where idByOrder = %ld", [[idByOrder objectAtIndex:i] integerValue]]];
+        FMResultSet *result = [self.database executeQuery:
+                               [NSString stringWithFormat:
+                                @"SELECT * FROM Exercise where idByOrder = %ld",
+                                [[idByOrder objectAtIndex:i] integerValue]]];
         while([result next])
         {
-            [array addObject:[[Question alloc] initWithDictionary : [result resultDictionary]]];
+            [array addObject:[[Question alloc] initWithDictionary :[result resultDictionary]]];
             break;
         }
     }
@@ -132,17 +142,19 @@
     return [array copy];
 }
 
--(void)addToFavorite:(NSInteger) idByOrder
+- (void)addToFavorite:(NSInteger)idByOrder
 {
-    NSMutableString *update = [[NSMutableString alloc] initWithString: @"UPDATE Exercise SET isFavorited=1 where idByOrder="];
+    NSMutableString *update = [[NSMutableString alloc] initWithString:
+                               @"UPDATE Exercise SET isFavorited=1 where idByOrder="];
     [update appendFormat:@"%ld", (long)idByOrder];
     [self.database executeUpdate: update];
 }
 
--(NSArray*)getAllFavs
+- (NSArray *)getAllFavs
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise where isFavorited=1"];
+    FMResultSet *result = [self.database executeQuery:
+                           @"SELECT * FROM Exercise where isFavorited=1"];
     while([result next])
     {
         [array addObject:[[Question alloc] initWithDictionary:[result resultDictionary] ]];
@@ -151,16 +163,19 @@
     return [array copy];
 }
 
--(void)removeFromFavorite:(NSInteger) idByOrder
+- (void)removeFromFavorite:(NSInteger)idByOrder
 {
-    NSMutableString *update = [[NSMutableString alloc] initWithString: @"UPDATE Exercise SET isFavorited=0 where idByOrder="];
+    NSMutableString *update = [[NSMutableString alloc] initWithString:
+                               @"UPDATE Exercise SET isFavorited=0 where idByOrder="];
     [update appendFormat:@"%ld", (long)idByOrder];
     [self.database executeUpdate: update];
 }
 
--(Question*)getQuestionsById:(NSInteger) key
+- (Question *)getQuestionsById:(NSInteger)key
 {
-    NSString *str = [NSString stringWithFormat:@"SELECT * FROM Exercise where idByOrder = %ld", key];
+    NSString *str = [NSString stringWithFormat:
+                     @"SELECT * FROM Exercise where idByOrder = %ld",
+                     key];
     FMResultSet *result = [self.database executeQuery: str];
     while ([result next])
     {
@@ -171,9 +186,13 @@
     return nil;
 }
 
--(NSInteger)getID
+/**
+ *  For future use.
+ */
+- (NSInteger)getID
 {
-    FMResultSet *result = [self.database executeQuery: @"SELECT * FROM Exercise group by random() limit 1"];
+    FMResultSet *result = [self.database executeQuery:
+                           @"SELECT * FROM Exercise group by random() limit 1"];
     while ([result next])
     {
         NSInteger str = [[[result resultDictionary] valueForKey:@"idByOrder"] intValue];

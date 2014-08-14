@@ -10,6 +10,10 @@
 
 @class Question;
 
+/**
+ *  This class stores current question, string with player's answer to that question, 
+ *  and current score
+ */
 @interface OneRound : NSObject <NSCopying>
 
 @property (nonatomic, strong) Question *currentQuestion;

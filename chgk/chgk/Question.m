@@ -35,10 +35,20 @@
 
 - (id)init
 {
-    NSLog(@"Please use initWithParseObject: instead");
+    NSLog(@"Please use initWithParseObject: or initWithDictionary: instead");
     [self doesNotRecognizeSelector:_cmd];
     
     return nil;
+}
+
+/**
+ *  Removes double spaces and new line characters from string
+ */
+- (NSString *)trimString:(NSString *)string
+{
+    NSString *text = [string stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+    return text;
 }
 
 - (instancetype)initWithParseObject:(PFObject *)object
@@ -74,31 +84,27 @@
         ID_ = [[dictionary objectForKey:@"id"] integerValue];
         IdByOrder_ = [[dictionary objectForKey:@"idByOrder"] integerValue];
     }
+    
     return self;
 }
 
-- (NSString *)trimString:(NSString *)string
-{
-    NSString *text = [string stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-    text = [text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
-    return text;
-}
-
-- (NSMutableAttributedString *)addFontAttribute:(UIFont *)font toString:(NSString *)inputString
+- (NSMutableAttributedString *)addFontAttribute:(UIFont *)font
+                                       toString:(NSString *)inputString
 {
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc]
                                          initWithString:inputString];
-    NSRange selectedRange = NSMakeRange(0, [inputString length]); // 4 characters, starting at index 22
     [string beginEditing];
     [string addAttribute:NSFontAttributeName
                    value:font
-                   range:selectedRange];
+                   range:NSMakeRange(0, [inputString length])];
     
     [string endEditing];
+    
     return string;
 }
 
-- (NSMutableAttributedString *)fullInfoWithMainFont:(UIFont *)mainFont andBoldFont:(UIFont *)boldFont
+- (NSMutableAttributedString *)fullInfoWithMainFont:(UIFont *)mainFont
+                                       andTitleFont:(UIFont *)boldFont
 {
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
 
@@ -119,14 +125,15 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     Question *copy = [[Question alloc]initWithDictionary:nil];
-    copy.question = self.question;
-    copy.answer = self.answer;
-    copy.annotation = self.annotation;
-    copy.authors = self.authors;
-    copy.sources = self.sources;
-    copy.pictureName = self.pictureName;
-    copy.ID = self.ID;
-    copy.IdByOrder = self.IdByOrder;
+    [copy setQuestion:self.question];
+    [copy setAnswer:self.answer];
+    [copy setAnnotation:self.annotation];
+    [copy setAuthors:self.authors];
+    [copy setSources:self.sources];
+    [copy setPictureName:self.pictureName];
+    [copy setID:self.ID];
+    [copy setIdByOrder:self.IdByOrder];
+
     return copy;
 }
 

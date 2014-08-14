@@ -28,12 +28,21 @@
 @synthesize tableView = tableView_;
 @synthesize isDeletable = isDeletable_;
 
+- (id)init
+{
+    NSLog(@"Please use initWithQuestions:deletable: instead");
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
 - (instancetype)initWithQuestions:(NSArray *)questions deletable:(BOOL)isDeletable
 {
     if (self = [super init]){
         questions_ = questions;
         isDeletable_ = isDeletable;
     }
+    
     return self;
 }
 
@@ -49,12 +58,6 @@
         [self.navigationItem setRightBarButtonItem:okBarButtonItem];
     }
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-//    self.tableView
-    //TODO: add a table
-//    self.label1.text = answers;
-
-    
-    
 }
 
 - (void)didTouchOKBarButtonItem:(UIBarButtonItem *)sender
@@ -91,17 +94,12 @@
     tableViewCell.textLabel.text = title;
     tableViewCell.detailTextLabel.text = [[self.questions objectAtIndex:indexPath.row] question];
     tableViewCell.detailTextLabel.numberOfLines = 4;
-    if (self.isDeletable){
-        [tableViewCell setEditing:UITableViewCellEditingStyleDelete];
-    }else{
-        [tableViewCell setEditing:UITableViewCellEditingStyleInsert];
-    }
     return tableViewCell;
 }
 
 
 - (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+        didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FullQuestionInfoVC *const viewController = [[FullQuestionInfoVC alloc]
                                                          initWithQuestion:self.questions[indexPath.row]];
@@ -118,31 +116,26 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)tableView:(UITableView *)tableView
+        canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.isDeletable;
+}
+
 - (void)tableView:(UITableView *)tableView
         commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
         forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //action after delete button is pressed
-        if (self.isDeletable){
-            NSMutableArray *mutableQuestions = [self.questions mutableCopy];
-            
-            Question *questionToDelete = mutableQuestions[indexPath.row];
-            [[DB standardBase] removeFromFavorite:questionToDelete.IdByOrder];
+        NSMutableArray *mutableQuestions = [self.questions mutableCopy];
+        
+        Question *questionToDelete = mutableQuestions[indexPath.row];
+        [[DB standardBase] removeFromFavorite:questionToDelete.IdByOrder];
 
-            [mutableQuestions removeObjectAtIndex:indexPath.row];
-            self.questions = [mutableQuestions copy];
-            
-            [self.tableView reloadData];
-        }
-        else {
-            UIAlertView *quickInfoAlert = [[UIAlertView alloc] initWithTitle:@"Эй!"
-                                                                     message:@"Не пытайтесь изменить ход истории!"
-                                                                    delegate:nil
-                                                           cancelButtonTitle:@"OK"
-                                                           otherButtonTitles:nil];
-            [quickInfoAlert show];
-        }
+        [mutableQuestions removeObjectAtIndex:indexPath.row];
+        self.questions = [mutableQuestions copy];
+        
+        [self.tableView reloadData];
     }
 }
 

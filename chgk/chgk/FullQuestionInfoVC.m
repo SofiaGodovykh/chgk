@@ -9,10 +9,12 @@
 #import "FullQuestionInfoVC.h"
 #import "Question.h"
 
+static const NSUInteger kBigFontSize = 14;
+static const NSUInteger kSmallFontSize = 11;
+
 @interface FullQuestionInfoVC ()
 
 @property (nonatomic, weak) IBOutlet UITextView *textView;
-@property (nonatomic, weak) IBOutlet UILabel *label1;
 @property (nonatomic, strong) Question *question;
 
 @end
@@ -20,14 +22,22 @@
 @implementation FullQuestionInfoVC
 @synthesize question = question_;
 
+- (id)init
+{
+    NSLog(@"Please use initWithQuestion: instead");
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
 - (instancetype)initWithQuestion:(Question *)question
 {
     if (self = [super init]){
         question_ = question;
     }
+    
     return self;
 }
-
 
 - (void)viewDidLoad
 {
@@ -41,8 +51,8 @@
         [self.navigationItem setRightBarButtonItem:okBarButtonItem];
     }
     [self.textView setAttributedText:
-     [self.question fullInfoWithMainFont:[UIFont systemFontOfSize:11]
-                             andBoldFont:[UIFont boldSystemFontOfSize:14]]];
+    [self.question fullInfoWithMainFont:[UIFont systemFontOfSize:kSmallFontSize]
+                           andTitleFont:[UIFont boldSystemFontOfSize:kBigFontSize]]];
      self.textView.textColor = [UIColor darkGrayColor];
 }
 

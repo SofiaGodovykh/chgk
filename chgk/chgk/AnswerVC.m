@@ -39,17 +39,7 @@
 @synthesize isRight = isRight_;
 @synthesize trimmingRegex = trimmingRegex_;
 
-- (NSRegularExpression *)trimmingRegex
-{
-    if (!trimmingRegex_){
-        trimmingRegex_ = [NSRegularExpression
-                          regularExpressionWithPattern:@"[^0-9a-zа-я]"
-                          options:NSRegularExpressionCaseInsensitive
-                          error:nil];
-    }
-    return trimmingRegex_;
-}
-
+#pragma mark initialization
 //TODO: bad practice to permit init of VC;
 - (id)init
 {
@@ -68,7 +58,35 @@
     return self;
 }
 
-- (BOOL)checkAnswer{
+/**
+ *  Regular expression for comparing answers, 
+    -(NSString *)trimString method will remove all symbols exept characters from string
+ */
+- (NSRegularExpression *)trimmingRegex
+{
+    if (!trimmingRegex_){
+        trimmingRegex_ = [NSRegularExpression
+                          regularExpressionWithPattern:@"[^0-9a-zа-я]"
+                          options:NSRegularExpressionCaseInsensitive
+                          error:nil];
+    }
+    return trimmingRegex_;
+}
+
+- (NSString *)trimString:(NSString *)string
+{
+    NSMutableString *modified = [[string lowercaseString] mutableCopy];
+    if (!!modified){
+        [self.trimmingRegex replaceMatchesInString:modified
+                                           options:kNilOptions
+                                             range:NSMakeRange(0, [modified length])
+                                      withTemplate:@""];
+    }
+    return [modified copy];
+}
+
+- (BOOL)checkAnswer
+{
     if (([[self trimString:self.oneRound.playerAnswer]
           isEqualToString:
           [self trimString:self.oneRound.currentQuestion.answer]]) ||
@@ -79,18 +97,7 @@
     return NO;
 }
 
-- (NSString *)trimString:(NSString *)string
-{
-    NSMutableString *modified = [[string lowercaseString] mutableCopy];
-    if (!!modified){
-    [self.trimmingRegex replaceMatchesInString:modified
-                                       options:kNilOptions
-                                         range:NSMakeRange(0, [modified length])
-                                  withTemplate:@""];
-    }
-    return [modified copy];
-}
-
+#pragma mark actions
 - (IBAction)nextQuestionPressed:(id)sender
 {
     [self.delegate nextQuestionAfterAnswer:self.isRight];

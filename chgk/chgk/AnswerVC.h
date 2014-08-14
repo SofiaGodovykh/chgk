@@ -13,7 +13,15 @@
 
 @interface AnswerVC : UIViewController
 
+/**
+ *  Returns the object that handles the delegated duties.
+ */
 @property (nonatomic, weak) id<ContinueDelegate> delegate;
+
+/**
+ *  Performs no initialization, use -initWithRound: instead
+ */
+- (id)init NS_UNAVAILABLE;
 
 - (instancetype)initWithRound:(OneRound *)round;
 
