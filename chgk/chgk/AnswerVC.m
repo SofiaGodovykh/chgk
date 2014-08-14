@@ -165,7 +165,7 @@
     
     UIImage *image = [UIImage imageNamed: @"favorite_on.png"];
     [self.addToFavoriteButton setImage:image forState: UIControlStateSelected];
-    [self.delegate questionsWatchDog];
+
 }
 
 @end

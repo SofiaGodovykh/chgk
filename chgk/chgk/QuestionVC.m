@@ -143,7 +143,7 @@ static NSString *const kPlayedKey = @"score";
                      completion:^{
                          [self dismissKeyboard];
                          [self stopTimer];
-
+                         [self questionsWatchDog];
                      }];
 }
 
