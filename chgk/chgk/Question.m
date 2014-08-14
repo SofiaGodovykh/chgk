@@ -84,20 +84,36 @@
     return text;
 }
 
-- (NSString *)fullInfo
+- (NSMutableAttributedString *)addFontAttribute:(UIFont *)font toString:(NSString *)inputString
 {
-    NSMutableString *text = [NSMutableString string];
-    [text appendString:@"Вопрос:\n"];
-    [text appendString:self.question];
-    [text appendString:@"\n\nОтвет:\n"];
-    [text appendString:self.answer];
-    [text appendString:@"\n\nАннотация:\n"];
-    [text appendString:self.annotation];
-    [text appendString:@"\n\nАвторы:\n"];
-    [text appendString:self.authors];
-    [text appendString:@"\n\nИсточники:\n"];
-    [text appendString:self.sources];
-    return [text copy];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]
+                                         initWithString:inputString];
+    NSRange selectedRange = NSMakeRange(0, [inputString length]); // 4 characters, starting at index 22
+    [string beginEditing];
+    [string addAttribute:NSFontAttributeName
+                   value:font
+                   range:selectedRange];
+    
+    [string endEditing];
+    return string;
+}
+
+- (NSMutableAttributedString *)fullInfoWithMainFont:(UIFont *)mainFont andBoldFont:(UIFont *)boldFont
+{
+    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+
+    [result appendAttributedString:[self addFontAttribute:boldFont toString:@"Вопрос:\n"]];
+    [result appendAttributedString:[self addFontAttribute:mainFont toString:self.question]];
+    [result appendAttributedString:[self addFontAttribute:boldFont toString:@"\n\nОтвет:\n"]];
+    [result appendAttributedString:[self addFontAttribute:mainFont toString:self.answer]];
+    [result appendAttributedString:[self addFontAttribute:boldFont toString:@"\n\nАннотация:\n"]];
+    [result appendAttributedString:[self addFontAttribute:mainFont toString:self.annotation]];
+    [result appendAttributedString:[self addFontAttribute:boldFont toString:@"\n\nАвторы:\n"]];
+    [result appendAttributedString:[self addFontAttribute:mainFont toString:self.authors]];
+    [result appendAttributedString:[self addFontAttribute:boldFont toString:@"\n\nИсточники:\n"]];
+    [result appendAttributedString:[self addFontAttribute:mainFont toString:self.sources]];
+
+    return result;
 }
 
 - (id)copyWithZone:(NSZone *)zone
