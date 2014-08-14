@@ -10,7 +10,7 @@
 
 @class PFObject;
 
-@interface Question : NSObject
+@interface Question : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) NSString *question;
 @property (nonatomic, copy, readonly) NSString *answer;

@@ -10,7 +10,7 @@
 
 @class Question;
 
-@interface OneRound : NSObject
+@interface OneRound : NSObject <NSCopying>
 
 @property (nonatomic, strong) Question *currentQuestion;
 @property (nonatomic, copy) NSString *playerAnswer;

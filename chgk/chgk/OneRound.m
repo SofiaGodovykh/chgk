@@ -13,4 +13,14 @@
 
 @synthesize currentQuestion = currentQuestion_;
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    OneRound *copy = [[OneRound allocWithZone:zone]init];
+    copy.currentQuestion = [self.currentQuestion copy];
+    copy.playerAnswer = self.playerAnswer;
+    copy.rightAnswers = self.rightAnswers;
+    copy.wrongAnswers = self.wrongAnswers;
+    return copy;
+}
+
 @end

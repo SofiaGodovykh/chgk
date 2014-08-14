@@ -100,4 +100,18 @@
     return [text copy];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    Question *copy = [[Question alloc]initWithDictionary:nil];
+    copy.question = self.question;
+    copy.answer = self.answer;
+    copy.annotation = self.annotation;
+    copy.authors = self.authors;
+    copy.sources = self.sources;
+    copy.pictureName = self.pictureName;
+    copy.ID = self.ID;
+    copy.IdByOrder = self.IdByOrder;
+    return copy;
+}
+
 @end
