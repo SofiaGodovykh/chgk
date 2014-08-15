@@ -77,7 +77,7 @@
     favoriteVC.delegate = self;
     UINavigationController *const navigationController =
     [[UINavigationController alloc] initWithRootViewController:favoriteVC];
-    
+    favoriteVC.navigationItem.title = @"Статистика игры";
     [self presentViewController:navigationController animated:YES completion:NULL];
 }
 

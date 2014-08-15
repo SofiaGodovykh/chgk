@@ -53,7 +53,7 @@
     favoriteVC.delegate = self;
     UINavigationController *const navigationController =
     [[UINavigationController alloc] initWithRootViewController:favoriteVC];
-    
+    favoriteVC.navigationItem.title = @"Избранное";
     [self presentViewController:navigationController animated:YES completion:NULL];
 }
 
